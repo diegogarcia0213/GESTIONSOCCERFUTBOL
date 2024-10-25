@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión </title>
+    <title>Inicio de Sesión</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,7 +66,7 @@
 <body>
 <div class="container">
     <h2>Inicio de Sesión</h2>
-    <form action="/iniciarSesion" method="POST">
+    <form th:action="@{/iniciarSesion}" method="POST">
         <label for="usuario">Nombre de Usuario:</label>
         <input type="text" id="usuario" name="usuario" required>
 
@@ -83,7 +83,7 @@
     </form>
 
     <div class="link">
-        <p>¿Eres nuevo? <a href="REGISTRO.html">Regístrate aquí</a></p>
+        <p>¿Eres nuevo? <a th:href="@{/registro}">Regístrate aquí</a></p>
     </div>
 </div>
 </body>

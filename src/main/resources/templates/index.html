@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: #3d5b72; /* Fondo azul claro */
+        background-color: #e0f7fa;
         font-family: 'Arial', sans-serif;
         display: flex;
         justify-content: center;
@@ -17,12 +17,11 @@
         height: 100vh;
     }
 
-    /* Contenedor principal con efecto 3D */
     .container {
-        background-color: #e0f7fa;
+        background-color: white;
         padding: 50px;
         width: 500px;
-        box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para efecto 3D */
+        box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
         border-radius: 15px;
         text-align: center;
     }
@@ -33,14 +32,12 @@
         margin-bottom: 40px;
     }
 
-    /* Estilo para la sección de botones */
     .button-container {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
     }
 
-    /* Estilo de los botones */
     .btn {
         background-color: white;
         color: #01579b;
@@ -49,19 +46,19 @@
         padding: 15px 30px;
         border: none;
         border-radius: 10px;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Efecto 3D */
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         transition: transform 0.2s, box-shadow 0.2s;
-        width: 45%; /* Los botones ocupan la mitad del espacio */
+        width: 45%;
     }
 
     .btn:hover {
-        transform: scale(1.05); /* Aumenta tamaño al pasar el cursor */
-        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+        transform: scale(1.05);
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .btn:active {
-        transform: scale(0.95); /* Efecto al hacer clic */
+        transform: scale(0.95);
     }
   </style>
 </head>
@@ -71,10 +68,11 @@
   <h1>BIENVENIDOS AL PROGRAMA DE FÚTBOL <br> PARA GESTIONAR ASISTENCIAS Y PAGOS</h1>
 
   <div class="button-container">
-    <button class="btn" onclick="location.href='LOGIN.html'">Iniciar Sesión</button>
-    <button class="btn" onclick="location.href='REGISTRO.html'">Registrarse</button>
+    <button class="btn" th:onclick="|location.href='@{/login}'|">Iniciar Sesión</button>
+    <button class="btn" th:onclick="|location.href='@{/registro}'|">Registrarse</button>
   </div>
 </div>
 
 </body>
 </html>
+
