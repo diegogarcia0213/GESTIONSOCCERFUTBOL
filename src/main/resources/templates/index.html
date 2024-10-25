@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal</title>
+  <style>
+    /* Estilo global */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #3d5b72; /* Fondo azul claro */
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Contenedor principal con efecto 3D */
+    .container {
+        background-color: #e0f7fa;
+        padding: 50px;
+        width: 500px;
+        box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para efecto 3D */
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #01579b;
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    /* Estilo para la sección de botones */
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    /* Estilo de los botones */
+    .btn {
+        background-color: white;
+        color: #01579b;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Efecto 3D */
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        width: 45%; /* Los botones ocupan la mitad del espacio */
+    }
+
+    .btn:hover {
+        transform: scale(1.05); /* Aumenta tamaño al pasar el cursor */
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+    }
+
+    .btn:active {
+        transform: scale(0.95); /* Efecto al hacer clic */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>BIENVENIDOS AL PROGRAMA DE FÚTBOL <br> PARA GESTIONAR ASISTENCIAS Y PAGOS</h1>
+
+  <div class="button-container">
+    <button class="btn" onclick="location.href='LOGIN.html'">Iniciar Sesión</button>
+    <button class="btn" onclick="location.href='REGISTRO.html'">Registrarse</button>
+  </div>
+</div>
+
+</body>
+</html>
