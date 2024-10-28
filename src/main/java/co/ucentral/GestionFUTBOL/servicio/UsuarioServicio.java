@@ -1,7 +1,5 @@
 package co.ucentral.GestionFUTBOL.servicio;
 
-
-
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Usuario;
 import co.ucentral.GestionFUTBOL.persistencia.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,9 @@ public class UsuarioServicio {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    // Método para registrar un usuario
     public Usuario registrarUsuario(Usuario usuario) {
-        // Guardamos el usuario tal cual, sin cifrar la contraseña
-        return usuarioRepositorio.save(usuario);
+        return usuarioRepositorio.save(usuario); // Guarda el usuario en la base de datos
     }
 
     public Optional<Usuario> validarCredenciales(String email, String password) {
