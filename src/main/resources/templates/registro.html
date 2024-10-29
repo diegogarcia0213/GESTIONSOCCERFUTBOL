@@ -79,12 +79,19 @@
     .link a:hover {
         text-decoration: underline;
     }
+
+    .mensaje {
+        color: green;
+        text-align: center;
+        margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
   <h2>Regístrate</h2>
+  <div th:if="${mensaje}" class="mensaje" th:text="${mensaje}"></div>
   <form th:action="@{/registro}" method="POST">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required>

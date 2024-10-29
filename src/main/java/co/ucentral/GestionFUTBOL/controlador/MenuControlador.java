@@ -19,12 +19,14 @@ public class MenuControlador {
     }
 
     @GetMapping("/login")
-    public String mostrarLogin() {
+    public String mostrarLogin(Model modelo) {
+        // Si hay un mensaje de error, se muestra en el login
         return "login"; // Redirige a login.html
     }
 
     @GetMapping("/registro")
-    public String mostrarRegistro() {
+    public String mostrarRegistro(Model modelo) {
+        // Se puede agregar un mensaje al modelo si es necesario
         return "registro"; // Redirige a registro.html
     }
 
@@ -67,5 +69,4 @@ public class MenuControlador {
         return "paginaentrenador";  // Redirige a paginaentrenador.html
     }
 }
-
 
