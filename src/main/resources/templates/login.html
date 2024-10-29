@@ -6,7 +6,7 @@
     <title>Inicio de Sesión</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #3d5b72;
             margin: 0;
             padding: 0;
@@ -19,8 +19,8 @@
             width: 400px;
             padding: 20px;
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h2 {
             text-align: center;
@@ -47,9 +47,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #45a049;
-        }
         .link {
             text-align: center;
             margin-top: 10px;
@@ -58,25 +55,22 @@
             color: #007bff;
             text-decoration: none;
         }
-        .link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Inicio de Sesión</h2>
     <form th:action="@{/iniciarSesion}" method="POST">
-        <label for="usuario">Nombre de Usuario:</label>
-        <input type="text" id="usuario" name="usuario" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
 
-        <label for="rol">Identificación:</label>
+        <label for="rol">Rol:</label>
         <select id="rol" name="rol" required>
-            <option value="jugador">Jugador</option>
-            <option value="entrenador">Entrenador</option>
+            <option value="JUGADOR">Jugador</option>
+            <option value="ENTRENADOR">Entrenador</option>
         </select>
 
         <button type="submit">Iniciar Sesión</button>

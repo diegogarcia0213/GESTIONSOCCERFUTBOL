@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nombre; // Campo para el nombre
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Rol rol;  // Uso del enum Rol
+    private Rol rol; // Uso del enum Rol
 
     // Getters y setters
     public Long getId() {
@@ -22,6 +22,14 @@ public class Usuario {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getEmail() {

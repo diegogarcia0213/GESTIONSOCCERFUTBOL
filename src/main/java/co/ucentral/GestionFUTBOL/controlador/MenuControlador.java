@@ -1,4 +1,5 @@
 package co.ucentral.GestionFUTBOL.controlador;
+
 import co.ucentral.GestionFUTBOL.servicio.UsuarioServicio;
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,4 +67,5 @@ public class MenuControlador {
         return "paginaentrenador";  // Redirige a paginaentrenador.html
     }
 }
+
 
