@@ -26,7 +26,6 @@ public class MenuControlador {
 
     @GetMapping("/registro")
     public String mostrarRegistro(Model modelo) {
-        // Se puede agregar un mensaje al modelo si es necesario
         return "registro"; // Redirige a registro.html
     }
 
@@ -44,14 +43,16 @@ public class MenuControlador {
                                 Model modelo) {
         return usuarioServicio.validarCredenciales(email, password)
                 .map(usuario -> {
-                    if (rol.equalsIgnoreCase("jugador")) {
-                        return "redirect:/paginajugador"; // Redirige a la página del jugador
-                    } else if (rol.equalsIgnoreCase("entrenador")) {
-                        return "redirect:/paginaentrenador"; // Redirige a la página del entrenador
+                    if (usuario.getRol().name().equalsIgnoreCase(rol)) {
+                        if (rol.equalsIgnoreCase("JUGADOR")) {
+                            return "redirect:/paginajugador"; // Redirige a la página del jugador
+                        } else if (rol.equalsIgnoreCase("ENTRENADOR")) {
+                            return "redirect:/paginaentrenador"; // Redirige a la página del entrenador
+                        }
                     } else {
                         modelo.addAttribute("error", "Rol no válido.");
-                        return "login"; // Vuelve a login si el rol es inválido
                     }
+                    return "login"; // Vuelve a login si el rol es inválido
                 })
                 .orElseGet(() -> {
                     modelo.addAttribute("error", "Email o contraseña incorrectos.");
@@ -69,4 +70,3 @@ public class MenuControlador {
         return "paginaentrenador";  // Redirige a paginaentrenador.html
     }
 }
-
