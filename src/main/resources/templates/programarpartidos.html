@@ -10,7 +10,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e3f2fd; /* Azul claro */
+            background-color: #3d5b72; /* Azul claro */
         }
 
         /* Estilo de la cabecera */
@@ -192,13 +192,10 @@
     </style>
 </head>
 <body>
-
-<!-- Cabecera -->
 <div class="header">
     <div class="left-buttons">
         <h1>Menú Principal Jugadores</h1>
-
-        <!-- Botón Entrenamientos con opciones desplegables -->
+        <!-- Botones de menú -->
         <div class="dropdown">
             <button class="button-3d">Entrenamientos</button>
             <div class="dropdown-content">
@@ -207,6 +204,7 @@
             </div>
         </div>
 
+        <!-- Botón Partidos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Partidos</button>
             <div class="dropdown-content">
@@ -215,21 +213,17 @@
             </div>
         </div>
     </div>
-
     <div class="right-buttons">
         <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>
 </div>
 
-<!-- Contenido principal -->
 <div class="content">
     <div class="form-container">
-        <h2>Programar Entrenamientos</h2>
-
-        <form th:action="@{/entrenamientos/registrar}" method="post">
+        <h2>Programar Partidos</h2>
+        <form th:action="@{/partidos/registrar}" method="post">
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha" name="fecha" required>
-
             <label>Categoría:</label>
             <div class="category-buttons">
                 <button type="button" class="category-button" onclick="selectCategory(this, 'Niños')">Niños</button>
@@ -237,7 +231,6 @@
                 <button type="button" class="category-button" onclick="selectCategory(this, 'Adultos')">Adultos</button>
             </div>
             <input type="hidden" id="categoria" name="categoria">
-
             <button type="submit" class="register-button">Registrar</button>
         </form>
     </div>
@@ -245,16 +238,10 @@
 
 <script>
     function selectCategory(button, category) {
-        // Deseleccionar cualquier botón previamente seleccionado
-        document.querySelectorAll('.category-button').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        // Marcar el botón seleccionado
+        document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('selected'));
         button.classList.add('selected');
-        // Asignar la categoría seleccionada al campo oculto
         document.getElementById('categoria').value = category;
     }
 </script>
-
 </body>
 </html>

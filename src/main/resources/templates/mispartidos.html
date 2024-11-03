@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programar Entrenamientos</title>
+    <title>Mis Partidos</title>
     <style>
         /* Estilo global */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e3f2fd; /* Azul claro */
+            background-color: #3d5b72; /* Azul claro */
         }
 
         /* Estilo de la cabecera */
@@ -29,6 +29,7 @@
             margin: 0;
         }
 
+        /* Estilo de botones de cabecera */
         .header .left-buttons,
         .header .right-buttons {
             display: flex;
@@ -57,12 +58,13 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* Estilo para el botón Salir en rojo */
         .button-exit {
             background-color: #d32f2f;
         }
 
         .button-exit:hover {
-            background-color: #ff5252; /* Rojo claro */
+            background-color: #ff5252; /* Rojo claro al hacer hover */
         }
 
         /* Dropdown */
@@ -102,50 +104,48 @@
             min-height: calc(100vh - 70px); /* Altura del contenido menos la cabecera */
         }
 
-        /* Estilo del formulario */
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-container h2 {
+        .content h2 {
             text-align: center;
             color: #1a237e;
             margin-bottom: 20px;
         }
 
-        label {
+        /* Estilo de la lista de partidos */
+        .training-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .training-item {
+            background-color: #fff8e1; /* Blanco crema */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .training-item:hover {
+            background-color: #ffe0b2; /* Crema más oscuro */
+        }
+
+        .training-item span {
             font-weight: bold;
-            display: block;
-            margin-top: 15px;
             color: #333;
         }
 
-        input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        /* Botones de categoría */
-        .category-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-
-        .category-button {
-            width: 30%;
-            padding: 10px 0;
+        /* Botón Eliminar */
+        .delete-button {
+            background-color: #d32f2f;
             color: white;
             font-weight: bold;
-            background-color: #4caf50;
+            padding: 10px 20px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -153,52 +153,20 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        .category-button.selected {
-            background-color: #6a1b9a; /* Morado oscuro para indicar selección */
+        .delete-button:hover {
+            background-color: #ff5252; /* Rojo más claro */
         }
 
-        .category-button:hover {
-            background-color: #388e3c; /* Verde oscuro al hacer hover */
-        }
-
-        .category-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Botón Registrar */
-        .register-button {
-            background-color: #225c18;
-            color: white;
-            font-weight: bold;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            float: right;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .register-button:hover {
-            background-color: #225c18; /* Verde más oscuro */
-        }
-
-        .register-button:active {
+        .delete-button:active {
             transform: translateY(2px);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-
-<!-- Cabecera -->
 <div class="header">
     <div class="left-buttons">
         <h1>Menú Principal Jugadores</h1>
-
-        <!-- Botón Entrenamientos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Entrenamientos</button>
             <div class="dropdown-content">
@@ -207,6 +175,7 @@
             </div>
         </div>
 
+        <!-- Botón Partidos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Partidos</button>
             <div class="dropdown-content">
@@ -215,46 +184,21 @@
             </div>
         </div>
     </div>
-
     <div class="right-buttons">
         <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>
 </div>
 
-<!-- Contenido principal -->
 <div class="content">
-    <div class="form-container">
-        <h2>Programar Entrenamientos</h2>
-
-        <form th:action="@{/entrenamientos/registrar}" method="post">
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
-
-            <label>Categoría:</label>
-            <div class="category-buttons">
-                <button type="button" class="category-button" onclick="selectCategory(this, 'Niños')">Niños</button>
-                <button type="button" class="category-button" onclick="selectCategory(this, 'Adolescentes')">Adolescentes</button>
-                <button type="button" class="category-button" onclick="selectCategory(this, 'Adultos')">Adultos</button>
-            </div>
-            <input type="hidden" id="categoria" name="categoria">
-
-            <button type="submit" class="register-button">Registrar</button>
+    <h2>Mis Partidos</h2>
+    <div class="training-list">
+        <form th:each="partido : ${partidos}" th:action="@{/partidos/eliminar/{id}(id=${partido.id})}" method="post" class="training-item">
+            <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span> |
+            <span>Categoría: <span th:text="${partido.categoria}">Categoría aquí</span></span>
+            <button type="submit" class="delete-button">Eliminar</button>
         </form>
     </div>
 </div>
-
-<script>
-    function selectCategory(button, category) {
-        // Deseleccionar cualquier botón previamente seleccionado
-        document.querySelectorAll('.category-button').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        // Marcar el botón seleccionado
-        button.classList.add('selected');
-        // Asignar la categoría seleccionada al campo oculto
-        document.getElementById('categoria').value = category;
-    }
-</script>
-
 </body>
 </html>
+

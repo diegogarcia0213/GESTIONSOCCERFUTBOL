@@ -19,7 +19,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 30px;
-            background-color: #1a237e; /* Azul oscuro */
+            background-color: #182968; /* Azul oscuro */
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -43,7 +43,7 @@
             color: white;
             border: none;
             border-radius: 8px;
-            background-color: #0d47a1; /* Azul predeterminado */
+            background-color: #182968; /* Azul predeterminado */
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -101,7 +101,7 @@
         .content {
             padding: 30px;
             text-align: center;
-            background-color: #bbdefb; /* Azul claro */
+            background-color: #3d5b72; /* Azul claro */
             min-height: calc(100vh - 70px); /* Altura del contenido menos la cabecera */
         }
 
@@ -133,8 +133,8 @@
         <div class="dropdown">
             <button class="button-3d">Partidos</button>
             <div class="dropdown-content">
-                <a th:href="@{/programarpartidos}">Programar Partidos</a>
-                <a th:href="@{/mispartidos}">Mis Partidos</a>
+                <a th:href="@{/partidos/programar}">Programar Partidos</a>
+                <a th:href="@{/partidos/mis}">Mis Partidos</a>
             </div>
         </div>
     </div>
@@ -151,6 +151,9 @@
     <div th:if="${param.confirmacion}" class="confirmation-message">
         Entrenamiento agendado
     </div>
+    <div th:if="${param.confirmacionPartido}" class="confirmation-message">
+        Partido agendado
+    </div>
 
     <!-- Contenido de la página -->
     <p>Bienvenido al sistema de gestión de asistencia y pagos. Selecciona una opción en el menú para comenzar.</p>
@@ -158,3 +161,4 @@
 
 </body>
 </html>
+
