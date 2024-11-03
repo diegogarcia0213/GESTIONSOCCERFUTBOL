@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Principal - Jugadores</title>
+    <title>Mis Entrenamientos</title>
     <style>
         /* Estilo global */
         body {
@@ -29,7 +29,6 @@
             margin: 0;
         }
 
-        /* Estilo de botones de cabecera */
         .header .left-buttons,
         .header .right-buttons {
             display: flex;
@@ -58,13 +57,12 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Estilo para el botón Salir en rojo */
         .button-exit {
             background-color: #d32f2f;
         }
 
         .button-exit:hover {
-            background-color: #ff5252; /* Rojo claro al hacer hover */
+            background-color: #ff5252; /* Rojo claro */
         }
 
         /* Dropdown */
@@ -97,19 +95,68 @@
             display: block;
         }
 
-        /* Estilo de contenido */
+        /* Estilo del área de contenido */
         .content {
             padding: 30px;
-            text-align: center;
             background-color: #bbdefb; /* Azul claro */
             min-height: calc(100vh - 70px); /* Altura del contenido menos la cabecera */
         }
 
-        /* Mensaje de confirmación */
-        .confirmation-message {
-            color: green;
-            font-weight: bold;
+        .content h2 {
+            text-align: center;
+            color: #1a237e;
             margin-bottom: 20px;
+        }
+
+        /* Estilo de la lista de entrenamientos */
+        .training-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .training-item {
+            background-color: #fff8e1; /* Blanco crema */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .training-item:hover {
+            background-color: #ffe0b2; /* Crema más oscuro */
+        }
+
+        .training-item span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Botón Eliminar */
+        .delete-button {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .delete-button:hover {
+            background-color: #ff5252; /* Rojo más claro */
+        }
+
+        .delete-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -118,7 +165,7 @@
 <!-- Cabecera -->
 <div class="header">
     <div class="left-buttons">
-        <h1>Menú Principal Jugadores</h1>
+        <h1>Menú Principal</h1>
 
         <!-- Botón Entrenamientos con opciones desplegables -->
         <div class="dropdown">
@@ -139,7 +186,6 @@
         </div>
     </div>
 
-    <!-- Botón Salir a la derecha -->
     <div class="right-buttons">
         <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>
@@ -147,13 +193,16 @@
 
 <!-- Contenido principal -->
 <div class="content">
-    <!-- Mostrar mensaje de confirmación si está presente en la URL -->
-    <div th:if="${param.confirmacion}" class="confirmation-message">
-        Entrenamiento agendado
-    </div>
+    <h2>Mis Entrenamientos</h2>
 
-    <!-- Contenido de la página -->
-    <p>Bienvenido al sistema de gestión de asistencia y pagos. Selecciona una opción en el menú para comenzar.</p>
+    <div class="training-list">
+        <!-- Lista dinámica de entrenamientos desde la base de datos -->
+        <form th:each="entrenamiento : ${entrenamientos}" th:action="@{/entrenamientos/eliminar/{id}(id=${entrenamiento.id})}" method="post" class="training-item">
+            <span>Fecha: <span th:text="${entrenamiento.fecha}">Fecha aquí</span></span> |
+            <span>Categoría: <span th:text="${entrenamiento.categoria}">Categoría aquí</span></span>
+            <button type="submit" class="delete-button">Eliminar</button>
+        </form>
+    </div>
 </div>
 
 </body>
