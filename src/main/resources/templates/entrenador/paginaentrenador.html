@@ -138,13 +138,13 @@
         <div class="dropdown">
             <button class="button-3d">Jugadores</button>
             <div class="dropdown-content">
-                <a th:href="@{/entrenadora/jugadores/lista}">Lista Jugadores</a>
-                <a th:href="@{/entrenadora/jugadores/pago}">Registrar Pago</a>
+                <a th:href="@{/entrenador/jugadores/lista}">Lista Jugadores</a>
+                <a th:href="@{/entrenador/jugadores/pago}">Registrar Pago</a>
             </div>
         </div>
 
         <!-- Botón Asistencia Partidos -->
-        <button class="button-3d" th:onclick="|window.location.href='@{/asistenciapartidos}'|">Asistencia Partidos</button>
+        <button class="button-3d" th:onclick="|location.href='@{/asistenciapartidos}'|">Asistencia Partidos</button>
     </div>
 
     <!-- Botón Salir a la derecha -->

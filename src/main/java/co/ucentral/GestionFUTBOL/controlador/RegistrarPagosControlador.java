@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/entrenadora")
+@RequestMapping("/entrenador")
 public class RegistrarPagosControlador {
 
     @Autowired
@@ -19,7 +19,7 @@ public class RegistrarPagosControlador {
     // Muestra la página principal del entrenador
     @GetMapping("/inicio")
     public String paginaPrincipalEntrenador() {
-        return "entrenadora/paginaentrenador"; // Redirige a entrenador/paginaentrenador.html
+        return "entrenador/paginaentrenador"; // Redirige a entrenador/paginaentrenador.html
     }
 
     // Muestra la lista de jugadores
@@ -27,7 +27,7 @@ public class RegistrarPagosControlador {
     public String mostrarListaJugadores(Model model) {
         List<Usuario> jugadores = registrarPagosServicio.obtenerJugadores();
         model.addAttribute("jugadores", jugadores);
-        return "entrenadora/listajugadores"; // Redirige a entrenador/listajugadores.html
+        return "entrenador/listajugadores"; // Redirige a entrenador/listajugadores.html
     }
 
     // Muestra la página para registrar pagos
