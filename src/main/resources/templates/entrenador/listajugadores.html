@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Principal - Entrenador</title>
+    <title>Lista Jugadores</title>
     <style>
         /* Estilo global */
         body {
@@ -29,7 +29,6 @@
             margin: 0;
         }
 
-        /* Estilo de botones de cabecera */
         .header .left-buttons,
         .header .right-buttons {
             display: flex;
@@ -58,7 +57,6 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Estilo para el botón Salir en rojo */
         .button-exit {
             background-color: #d32f2f;
         }
@@ -67,7 +65,6 @@
             background-color: #ff5252; /* Rojo claro */
         }
 
-        /* Dropdown */
         .dropdown {
             position: relative;
         }
@@ -89,27 +86,69 @@
             display: block;
         }
 
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
 
-        /* Estilo de contenido */
+        /* Contenido */
         .content {
             padding: 30px;
-            text-align: center;
-            background-color: #521325; /* Color del contenido */
-            min-height: calc(100vh - 70px); /* Altura del contenido menos la cabecera */
+            background-color: #521325;
+            min-height: calc(100vh - 70px);
+            color: white;
         }
 
-        /* Mensaje de confirmación */
-        .confirmation-message {
-            color: green;
+        /* Tabla */
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #182968;
+            color: white;
+        }
+
+        /* Estado de suscripción */
+        .estado-inactivo {
+            color: #d32f2f; /* Rojo */
+        }
+
+        .estado-activo {
+            color: #2e7d32; /* Verde */
             font-weight: bold;
-            margin-bottom: 20px;
+        }
+
+        /* Indicador de suscripción */
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .green {
+            background-color: #2e7d32; /* Verde */
+        }
+
+        .red {
+            background-color: #d32f2f; /* Rojo */
         }
     </style>
 </head>
@@ -120,7 +159,6 @@
     <div class="left-buttons">
         <h1>Menú Principal Entrenador</h1>
 
-        <!-- Botón Ver Entrenamientos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Ver Entrenamientos</button>
             <div class="dropdown-content">
@@ -130,7 +168,6 @@
             </div>
         </div>
 
-        <!-- Botón Ver Partidos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Ver Partidos</button>
             <div class="dropdown-content">
@@ -140,40 +177,50 @@
             </div>
         </div>
 
-        <!-- Botón Jugadores con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Jugadores</button>
             <div class="dropdown-content">
                 <a th:href="@{/entrenador/jugadores/lista}">Lista Jugadores</a>
                 <a th:href="@{/entrenador/jugadores/pago}">Registrar Pago</a>
             </div>
-
         </div>
 
-        <!-- Botón Asistencia Partidos -->
         <button class="button-3d" th:onclick="|location.href='@{/asistenciapartidos}'|">Asistencia Partidos</button>
     </div>
 
-    <!-- Botón Salir a la derecha -->
     <div class="right-buttons">
-        <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/'|">Salir</button>
     </div>
 </div>
 
 <!-- Contenido principal -->
 <div class="content">
-    <!-- Mostrar mensaje de confirmación si está presente en la URL -->
-    <div th:if="${param.confirmacion}" class="confirmation-message">
-        Entrenamiento agendado
-    </div>
-    <div th:if="${param.confirmacionPartido}" class="confirmation-message">
-        Partido agendado
-    </div>
+    <h2>Lista Jugadores</h2>
 
-    <!-- Contenido de la página -->
-    <p>Bienvenido al sistema de gestión de jugadores y entrenamientos. Selecciona una opción en el menú para comenzar.</p>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Estado Suscripción</th>
+                <th>Modo Suscripción</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="jugador : ${jugadores}">
+                <td th:text="${jugador.nombre}">Nombre del Jugador</td>
+                <td th:text="${jugador.estadoSuscripcion}"
+                    th:classappend="${jugador.estadoSuscripcion == 'Activo' ? 'estado-activo' : 'estado-inactivo'}">
+                    Estado Suscripción
+                </td>
+                <td>
+                    <div th:classappend="${jugador.estadoSuscripcion == 'Activo' ? 'circle green' : 'circle red'}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>
 </html>
-

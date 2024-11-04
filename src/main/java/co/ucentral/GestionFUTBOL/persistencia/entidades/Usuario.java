@@ -15,6 +15,8 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Rol rol; // Uso del enum Rol
 
+    private String estadoSuscripcion = "Inactivo"; // Valor inicial para el estado de suscripción
+
     // Getters y setters
     public Long getId() {
         return id;
@@ -55,4 +57,13 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public String getEstadoSuscripcion() {
+        return estadoSuscripcion;
+    }
+
+    public void setEstadoSuscripcion(String estadoSuscripcion) {
+        this.estadoSuscripcion = estadoSuscripcion;
+    }
 }
+

@@ -13,22 +13,25 @@ public class MenuControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    // Página de inicio
     @GetMapping("/")
     public String mostrarInicio() {
-        return "index"; // Redirige a index.html
+        return "index"; // Redirige a index.html en la raíz de templates
     }
 
+    // Página de login
     @GetMapping("/login")
     public String mostrarLogin(Model modelo) {
-        // Si hay un mensaje de error, se muestra en el login
-        return "login"; // Redirige a login.html
+        return "login"; // Redirige a login.html en la raíz de templates
     }
 
+    // Página de registro
     @GetMapping("/registro")
     public String mostrarRegistro(Model modelo) {
-        return "registro"; // Redirige a registro.html
+        return "registro"; // Redirige a registro.html en la raíz de templates
     }
 
+    // Procesa el registro de un usuario
     @PostMapping("/registro")
     public String registrarUsuario(@ModelAttribute Usuario usuario, Model modelo) {
         usuarioServicio.registrarUsuario(usuario);
@@ -36,6 +39,7 @@ public class MenuControlador {
         return "login"; // Redirige a login.html después de registrar
     }
 
+    // Procesa el inicio de sesión y redirige según el rol
     @PostMapping("/iniciarSesion")
     public String iniciarSesion(@RequestParam String email,
                                 @RequestParam String password,
@@ -45,9 +49,9 @@ public class MenuControlador {
                 .map(usuario -> {
                     if (usuario.getRol().name().equalsIgnoreCase(rol)) {
                         if (rol.equalsIgnoreCase("JUGADOR")) {
-                            return "redirect:/paginajugador"; // Redirige a la página del jugador
+                            return "redirect:/jugador/paginajugador"; // Redirige a la página del jugador en la carpeta 'jugador'
                         } else if (rol.equalsIgnoreCase("ENTRENADOR")) {
-                            return "redirect:/paginaentrenador"; // Redirige a la página del entrenador
+                            return "redirect:/entrenador/paginaentrenador"; // Redirige a la página del entrenador en la carpeta 'entrenador'
                         }
                     } else {
                         modelo.addAttribute("error", "Rol no válido.");
@@ -60,13 +64,15 @@ public class MenuControlador {
                 });
     }
 
-    @GetMapping("/paginajugador")
+    // Muestra la página principal del jugador
+    @GetMapping("/jugador/paginajugador")
     public String mostrarPaginaJugador() {
-        return "paginajugador";  // Redirige a paginajugador.html
+        return "jugador/paginajugador";  // Redirige a jugador/paginajugador.html
     }
 
-    @GetMapping("/paginaentrenador")
+    // Muestra la página principal del entrenador
+    @GetMapping("/entrenador/paginaentrenador")
     public String mostrarPaginaEntrenador() {
-        return "paginaentrenador";  // Redirige a paginaentrenador.html
+        return "entrenador/paginaentrenador";  // Redirige a entrenador/paginaentrenador.html
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista Jugadores</title>
+    <title>Menú Principal - Entrenadores</title>
     <style>
         /* Estilo global */
         body {
@@ -29,6 +29,7 @@
             margin: 0;
         }
 
+        /* Estilo de botones de cabecera */
         .header .left-buttons,
         .header .right-buttons {
             display: flex;
@@ -57,14 +58,16 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
+        /* Estilo para el botón Salir en rojo */
         .button-exit {
             background-color: #d32f2f;
         }
 
         .button-exit:hover {
-            background-color: #ff5252; /* Rojo claro */
+            background-color: #ff5252; /* Rojo claro al hacer hover */
         }
 
+        /* Dropdown */
         .dropdown {
             position: relative;
         }
@@ -86,68 +89,21 @@
             display: block;
         }
 
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
         .dropdown:hover .dropdown-content {
             display: block;
         }
 
-        /* Contenido */
+        /* Estilo de contenido */
         .content {
             padding: 30px;
-            background-color: #521325;
-            min-height: calc(100vh - 70px);
-            color: white;
-        }
-
-        /* Tabla */
-        .table-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px 15px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #182968;
+            background-color: #521325; /* Azul claro */
+            min-height: calc(100vh - 70px); /* Altura del contenido menos la cabecera */
             color: white;
-        }
-
-        .estado-inactivo {
-            color: #d32f2f; /* Rojo */
-        }
-
-        .estado-activo {
-            color: #2e7d32; /* Verde */
-            font-weight: bold;
-        }
-
-        .suscripcion-rojo {
-            width: 20px;
-            height: 20px;
-            background-color: #d32f2f; /* Rojo */
-            border-radius: 50%;
-            margin: 0 auto;
-        }
-
-        .suscripcion-verde {
-            width: 20px;
-            height: 20px;
-            background-color: #2e7d32; /* Verde */
-            border-radius: 50%;
-            margin: 0 auto;
         }
     </style>
 </head>
@@ -156,37 +112,42 @@
 <!-- Cabecera -->
 <div class="header">
     <div class="left-buttons">
-        <h1>Menú Principal Entrenador</h1>
+        <h1>Menú Principal Jugadores</h1>
 
+        <!-- Botón Ver Entrenamientos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Ver Entrenamientos</button>
             <div class="dropdown-content">
-                <a th:href="@{/entrenamientos/ver/ninos}">Niños</a>
-                <a th:href="@{/entrenamientos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/entrenamientos/ver/adultos}">Adultos</a>
+                <a th:href="@{/entrenamientos/ver/ninos}">Niño</a>
+                <a th:href="@{/entrenamientos/ver/adolecentes}">Adolescente</a>
+                <a th:href="@{/entrenamientos/ver/adultos}">Adulto</a>
             </div>
         </div>
 
+        <!-- Botón Ver Partidos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Ver Partidos</button>
             <div class="dropdown-content">
-                <a th:href="@{/partidos/ver/ninos}">Niños</a>
-                <a th:href="@{/partidos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/partidos/ver/adultos}">Adultos</a>
+                <a th:href="@{/partidos/ver/ninos}">Niño</a>
+                <a th:href="@{/partidos/ver/adolecentes}">Adolescente</a>
+                <a th:href="@{/partidos/ver/adultos}">Adulto</a>
             </div>
         </div>
 
+        <!-- Botón Jugadores con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Jugadores</button>
             <div class="dropdown-content">
-                <a th:href="@{/jugadores/lista}">Lista Jugadores</a>
-                <a th:href="@{/jugadores/pago}">Registrar Pago</a>
+                <a th:href="@{/entrenadora/jugadores/lista}">Lista Jugadores</a>
+                <a th:href="@{/entrenadora/jugadores/pago}">Registrar Pago</a>
             </div>
         </div>
 
-        <button class="button-3d" th:onclick="|location.href='@{/asistenciapartidos}'|">Asistencia Partidos</button>
+        <!-- Botón Asistencia Partidos -->
+        <button class="button-3d" th:onclick="|window.location.href='@{/asistenciapartidos}'|">Asistencia Partidos</button>
     </div>
 
+    <!-- Botón Salir a la derecha -->
     <div class="right-buttons">
         <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>
@@ -194,31 +155,7 @@
 
 <!-- Contenido principal -->
 <div class="content">
-    <h2>Lista Jugadores</h2>
-
-    <div class="table-container">
-        <table>
-            <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Estado Suscripción</th>
-                <th>Modo Suscripción</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="jugador : ${jugadores}">
-                <td th:text="${jugador.nombre}">Nombre del jugador</td>
-                <td th:text="${jugador.estadoSuscripcion ? 'Activo' : 'Inactivo'}"
-                    th:classappend="${jugador.estadoSuscripcion ? 'estado-activo' : 'estado-inactivo'}">
-                    Estado de Suscripción
-                </td>
-                <td>
-                    <div th:classappend="${jugador.estadoSuscripcion ? 'suscripcion-verde' : 'suscripcion-rojo'}"></div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <p>Bienvenido al sistema de gestión de jugadores y entrenamientos. Selecciona una opción en el menú para comenzar.</p>
 </div>
 
 </body>

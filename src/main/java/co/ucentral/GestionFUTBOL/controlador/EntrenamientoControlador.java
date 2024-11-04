@@ -20,7 +20,7 @@ public class EntrenamientoControlador {
     // Muestra la página para programar entrenamientos
     @GetMapping("/programar")
     public String mostrarProgramarEntrenamientos() {
-        return "programarentrenamientos";
+        return "jugador/programarentrenamientos"; // Apunta a jugador/programarentrenamientos.html
     }
 
     // Maneja el registro de un entrenamiento y redirige a la página principal de jugador con mensaje
@@ -30,7 +30,7 @@ public class EntrenamientoControlador {
                                          Model model) {
         entrenamientoServicio.registrarEntrenamiento(LocalDate.parse(fecha), categoria);
         model.addAttribute("mensaje", "Entrenamiento agendado");
-        return "redirect:/paginajugador?confirmacion=true"; // Redirige a paginajugador.html con un mensaje de confirmación
+        return "redirect:/jugador/paginajugador?confirmacion=true"; // Redirige a jugador/paginajugador.html con confirmación
     }
 
     // Muestra la página de mis entrenamientos con la lista de entrenamientos
@@ -38,7 +38,7 @@ public class EntrenamientoControlador {
     public String mostrarMisEntrenamientos(Model model) {
         List<Entrenamientos> entrenamientos = entrenamientoServicio.listarEntrenamientos();
         model.addAttribute("entrenamientos", entrenamientos);
-        return "misentrenamientos";
+        return "jugador/misentrenamientos"; // Apunta a jugador/misentrenamientos.html
     }
 
     // Maneja la eliminación de un entrenamiento por su ID
