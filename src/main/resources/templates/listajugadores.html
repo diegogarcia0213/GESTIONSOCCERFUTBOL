@@ -1,10 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Jugadores</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd; /* Azul claro */
+        }
+
+        /* Estilo de la cabecera */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #182968; /* Azul oscuro */
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .header .left-buttons,
+        .header .right-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .button-3d {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            background-color: #182968; /* Azul predeterminado */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-3d:hover {
+            background-color: #fbc02d; /* Amarillo al hacer hover */
+        }
+
+        .button-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-exit {
+            background-color: #d32f2f;
+        }
+
+        .button-exit:hover {
+            background-color: #ff5252; /* Rojo claro */
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #0d47a1;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Contenido */
+        .content {
+            padding: 30px;
+            background-color: #521325;
+            min-height: calc(100vh - 70px);
+            color: white;
+        }
+
+        /* Tabla */
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #182968;
+            color: white;
+        }
+
+        .estado-inactivo {
+            color: #d32f2f; /* Rojo */
+        }
+
+        .estado-activo {
+            color: #2e7d32; /* Verde */
+            font-weight: bold;
+        }
+
+        .suscripcion-rojo {
+            width: 20px;
+            height: 20px;
+            background-color: #d32f2f; /* Rojo */
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .suscripcion-verde {
+            width: 20px;
+            height: 20px;
+            background-color: #2e7d32; /* Verde */
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
+
+<!-- Cabecera -->
+<div class="header">
+    <div class="left-buttons">
+        <h1>Menú Principal Entrenador</h1>
+
+        <div class="dropdown">
+            <button class="button-3d">Ver Entrenamientos</button>
+            <div class="dropdown-content">
+                <a th:href="@{/entrenamientos/ver/ninos}">Niños</a>
+                <a th:href="@{/entrenamientos/ver/adolecentes}">Adolescentes</a>
+                <a th:href="@{/entrenamientos/ver/adultos}">Adultos</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="button-3d">Ver Partidos</button>
+            <div class="dropdown-content">
+                <a th:href="@{/partidos/ver/ninos}">Niños</a>
+                <a th:href="@{/partidos/ver/adolecentes}">Adolescentes</a>
+                <a th:href="@{/partidos/ver/adultos}">Adultos</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="button-3d">Jugadores</button>
+            <div class="dropdown-content">
+                <a th:href="@{/jugadores/lista}">Lista Jugadores</a>
+                <a th:href="@{/jugadores/pago}">Registrar Pago</a>
+            </div>
+        </div>
+
+        <button class="button-3d" th:onclick="|location.href='@{/asistenciapartidos}'|">Asistencia Partidos</button>
+    </div>
+
+    <div class="right-buttons">
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
+    </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="content">
+    <h2>Lista Jugadores</h2>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Estado Suscripción</th>
+                <th>Modo Suscripción</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="jugador : ${jugadores}">
+                <td th:text="${jugador.nombre}">Nombre del jugador</td>
+                <td th:text="${jugador.estadoSuscripcion ? 'Activo' : 'Inactivo'}"
+                    th:classappend="${jugador.estadoSuscripcion ? 'estado-activo' : 'estado-inactivo'}">
+                    Estado de Suscripción
+                </td>
+                <td>
+                    <div th:classappend="${jugador.estadoSuscripcion ? 'suscripcion-verde' : 'suscripcion-rojo'}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>
