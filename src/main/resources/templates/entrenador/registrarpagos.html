@@ -162,33 +162,30 @@
         <div class="dropdown">
             <button class="button-3d">Ver Entrenamientos</button>
             <div class="dropdown-content">
-                <a th:href="@{/entrenamientos/ver/ninos}">Niños</a>
-                <a th:href="@{/entrenamientos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/entrenamientos/ver/adultos}">Adultos</a>
+                <a th:href="@{/entrenador/entrenamientos/ver/ninos}">Niños</a>
+                <a th:href="@{/entrenador/entrenamientos/ver/adolecentes}">Adolescentes</a>
+                <a th:href="@{/entrenador/entrenamientos/ver/adultos}">Adultos</a>
             </div>
         </div>
 
-        <!-- Botón Ver Partidos con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Ver Partidos</button>
             <div class="dropdown-content">
-                <a th:href="@{/partidos/ver/ninos}">Niños</a>
-                <a th:href="@{/partidos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/partidos/ver/adultos}">Adultos</a>
+                <a th:href="@{/entrenador/partidos/ver/ninos}">Niños</a>
+                <a th:href="@{/entrenador/partidos/ver/adolecentes}">Adolescentes</a>
+                <a th:href="@{/entrenador/partidos/ver/adultos}">Adultos</a>
             </div>
         </div>
 
-        <!-- Botón Jugadores con opciones desplegables -->
         <div class="dropdown">
             <button class="button-3d">Jugadores</button>
             <div class="dropdown-content">
-                <a th:href="@{/jugadores/lista}">Lista Jugadores</a>
-                <a th:href="@{/jugadores/pago}">Registrar Pago</a>
+                <a th:href="@{/entrenador/lista}">Lista Jugadores</a>
+                <a th:href="@{/entrenador/pago}">Registrar Pago</a>
             </div>
         </div>
 
-        <!-- Botón Asistencia Partidos -->
-        <button class="button-3d" th:onclick="|location.href='@{/asistenciapartidos}'|">Asistencia Partidos</button>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
     </div>
 
     <div class="right-buttons">
