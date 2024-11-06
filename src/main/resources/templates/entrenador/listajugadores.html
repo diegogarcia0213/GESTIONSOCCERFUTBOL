@@ -150,6 +150,23 @@
         .red {
             background-color: #d32f2f;
         }
+
+        /* Estilo del botón de eliminación */
+        .delete-button {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        .delete-button:hover {
+            background-color: #ff5252;
+        }
     </style>
 </head>
 <body>
@@ -189,7 +206,7 @@
     </div>
 
     <div class="right-buttons">
-        <button class="button-3d button-exit" th:onclick="|location.href='@{/'|">Salir</button>
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>
 </div>
 
@@ -197,29 +214,37 @@
 <div class="content">
     <h2>Lista Jugadores</h2>
 
-    <div class="table-container">
-        <table>
-            <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Estado Suscripción</th>
-                <th>Modo Suscripción</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="jugador : ${jugadores}">
-                <td th:text="${jugador.nombre}">Nombre del Jugador</td>
-                <td th:text="${jugador.estadoSuscripcion}"
-                    th:classappend="${jugador.estadoSuscripcion == 'Activo' ? 'estado-activo' : 'estado-inactivo'}">
-                    Estado Suscripción
-                </td>
-                <td>
-                    <div th:classappend="${jugador.estadoSuscripcion == 'Activo' ? 'circle green' : 'circle red'}"></div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <form th:action="@{/entrenador/eliminar-jugadores}" method="post">
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>Seleccionar</th>
+                    <th>Nombre</th>
+                    <th>Estado Suscripción</th>
+                    <th>Modo Suscripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="jugador : ${jugadores}">
+                    <!-- Checkbox para seleccionar el jugador -->
+                    <td><input type="checkbox" name="jugadorIds" th:value="${jugador.id}" /></td>
+                    <td th:text="${jugador.nombre}">Nombre del Jugador</td>
+                    <td th:text="${jugador.estadoSuscripcion}"
+                        th:classappend="${jugador.estadoSuscripcion == 'Activo' ? 'estado-activo' : 'estado-inactivo'}">
+                        Estado Suscripción
+                    </td>
+                    <td>
+                        <div th:classappend="${jugador.estadoSuscripcion == 'Activo' ? 'circle green' : 'circle red'}"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón para eliminar jugadores seleccionados -->
+        <button type="submit" class="delete-button">Eliminar Jugador Activo</button>
+    </form>
 </div>
 
 </body>
