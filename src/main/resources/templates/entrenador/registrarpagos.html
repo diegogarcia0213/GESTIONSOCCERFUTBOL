@@ -42,14 +42,14 @@
             color: white;
             border: none;
             border-radius: 8px;
-            background-color: #182968; /* Azul predeterminado */
+            background-color: #182968;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         .button-3d:hover {
-            background-color: #fbc02d; /* Amarillo al hacer hover */
+            background-color: #fbc02d;
         }
 
         .button-3d:active {
@@ -62,7 +62,7 @@
         }
 
         .button-exit:hover {
-            background-color: #ff5252; /* Rojo claro */
+            background-color: #ff5252;
         }
 
         .dropdown {
@@ -90,6 +90,7 @@
             display: block;
         }
 
+        /* Contenido */
         .content {
             padding: 30px;
             background-color: #521325;
@@ -197,19 +198,22 @@
 <div class="content">
     <div class="form-container">
         <h2>Registrar Pago</h2>
-        <form th:action="@{/entrenador/jugadores/pago}" method="post">
+        <form th:action="@{/entrenador/pago}" method="post">
             <label for="jugador">Nombre del Jugador:</label>
-            <select id="jugador" name="jugadorId" required>
+            <select id="jugador" name="usuarioId" required>
                 <option th:each="jugador : ${jugadores}"
                         th:value="${jugador.id}"
                         th:text="${jugador.nombre}">Nombre del jugador</option>
             </select>
 
             <label for="monto">Monto:</label>
-            <input type="number" id="monto" name="monto" required placeholder="Ingresa el monto (solo números enteros)">
+            <input type="number" id="monto" name="monto" min="50000" max="50000" required placeholder="50,000" />
 
             <button type="submit" class="register-button">Registrar Pago</button>
         </form>
+
+        <div th:if="${success}" style="color: green; margin-top: 15px;" th:text="${success}"></div>
+        <div th:if="${error}" style="color: red; margin-top: 15px;" th:text="${error}"></div>
     </div>
 </div>
 
