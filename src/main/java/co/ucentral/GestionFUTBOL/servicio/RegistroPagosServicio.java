@@ -6,6 +6,7 @@ import co.ucentral.GestionFUTBOL.persistencia.repositorio.RegistroPagosRepositor
 import co.ucentral.GestionFUTBOL.persistencia.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegistroPagosServicio {
@@ -16,24 +17,32 @@ public class RegistroPagosServicio {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Transactional
     public boolean registrarPago(Long usuarioId, int monto) {
         if (monto == 50000) {
             try {
                 Usuario usuario = usuarioRepositorio.findById(usuarioId).orElse(null);
                 if (usuario != null) {
+                    // Crear y guardar el registro de pago
                     RegistroPagos pago = new RegistroPagos();
                     pago.setUsuario(usuario);
                     pago.setMonto(monto);
-                    pago.setEstadoSuscripcion("Activo");
-                    pago.setModoSuscripcion("Green"); // Indicador de pago (verde)
                     registroPagosRepositorio.save(pago);
-                    usuario.setEstadoSuscripcion("Activo"); // Actualiza el estado en Usuario
-                    usuarioRepositorio.save(usuario); // Guarda el cambio en Usuario
+
+                    // Actualizar el estado de suscripción en Usuario
+                    usuario.setEstadoSuscripcion("Activo");
+                    usuarioRepositorio.save(usuario);
+
+                    System.out.println("Registro de pago y actualización de usuario exitosos.");
                     return true;
+                } else {
+                    System.out.println("Usuario no encontrado con ID: " + usuarioId);
                 }
             } catch (Exception e) {
-                e.printStackTrace(); // Imprime la excepción en los logs para depuración
+                e.printStackTrace();
             }
+        } else {
+            System.out.println("Monto inválido para registrar el pago: " + monto);
         }
         return false;
     }

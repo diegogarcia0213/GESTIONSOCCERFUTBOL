@@ -25,18 +25,18 @@ public class RegistrarPagosControlador {
     public String mostrarRegistrarPago(Model model) {
         List<Usuario> jugadores = usuarioRepositorio.findByRol(Rol.JUGADOR);
         model.addAttribute("jugadores", jugadores);
-        return "entrenador/registrarpagos"; // Ajuste para la ruta correcta de la vista
+        return "entrenador/registrarpagos";
     }
 
     @PostMapping("/pago")
     public String registrarPago(@RequestParam Long usuarioId, @RequestParam int monto, Model model) {
         boolean exito = registroPagosServicio.registrarPago(usuarioId, monto);
         if (exito) {
-            model.addAttribute("success", "Pago registrado con éxito.");
+            return "redirect:/entrenador/lista"; // Redirige a lista de jugadores
         } else {
             model.addAttribute("error", "El monto debe ser 50,000 para registrar el pago.");
+            return "entrenador/registrarpagos";
         }
-        return "entrenador/registrarpagos"; // Ajuste para la ruta correcta de la vista
     }
 
     @GetMapping("/lista")
