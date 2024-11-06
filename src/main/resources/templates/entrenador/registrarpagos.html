@@ -10,7 +10,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e3f2fd; /* Azul claro */
+            background-color: #e3f2fd;
         }
 
         /* Estilo de la cabecera */
@@ -19,7 +19,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 30px;
-            background-color: #182968; /* Azul oscuro */
+            background-color: #182968;
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -207,7 +207,8 @@
             </select>
 
             <label for="monto">Monto:</label>
-            <input type="number" id="monto" name="monto" min="50000" max="50000" required placeholder="50,000" />
+            <!-- Ajuste del campo para evitar puntos y formato -->
+            <input type="number" id="monto" name="monto" min="50000" max="50000" step="1" required placeholder="50000" />
 
             <button type="submit" class="register-button">Registrar Pago</button>
         </form>
@@ -219,3 +220,4 @@
 
 </body>
 </html>
+

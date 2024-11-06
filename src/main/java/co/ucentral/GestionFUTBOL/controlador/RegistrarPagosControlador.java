@@ -1,6 +1,5 @@
 package co.ucentral.GestionFUTBOL.controlador;
 
-
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Usuario;
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Rol;
 import co.ucentral.GestionFUTBOL.servicio.RegistroPagosServicio;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-        import java.util.List;
+import java.util.List;
 
 @Controller
 @RequestMapping("/entrenador")
@@ -26,7 +25,7 @@ public class RegistrarPagosControlador {
     public String mostrarRegistrarPago(Model model) {
         List<Usuario> jugadores = usuarioRepositorio.findByRol(Rol.JUGADOR);
         model.addAttribute("jugadores", jugadores);
-        return "entrenador/registrarpagos";
+        return "entrenador/registrarpagos"; // Ajuste para la ruta correcta de la vista
     }
 
     @PostMapping("/pago")
@@ -37,7 +36,7 @@ public class RegistrarPagosControlador {
         } else {
             model.addAttribute("error", "El monto debe ser 50,000 para registrar el pago.");
         }
-        return "registrarpagos";
+        return "entrenador/registrarpagos"; // Ajuste para la ruta correcta de la vista
     }
 
     @GetMapping("/lista")
