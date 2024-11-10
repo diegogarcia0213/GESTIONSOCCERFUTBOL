@@ -1,6 +1,7 @@
 package co.ucentral.GestionFUTBOL.servicio;
 
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Partidos;
+import co.ucentral.GestionFUTBOL.persistencia.entidades.Usuario;
 import co.ucentral.GestionFUTBOL.persistencia.repositorio.PartidosRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,18 +16,25 @@ public class PartidosServicio {
     @Autowired
     private PartidosRepositorio partidosRepositorio;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
     // Método para registrar un partido
     public void registrarPartido(Long usuarioId, LocalDate fecha, String categoria) {
-        Partidos partido = new Partidos();
-        partido.setUsuarioId(usuarioId);
-        partido.setFecha(fecha);
-        partido.setCategoria(categoria);
-        partidosRepositorio.save(partido);
+        Usuario usuario = usuarioServicio.obtenerUsuarioPorId(usuarioId); // Obtiene el objeto Usuario
+        if (usuario != null) {
+            Partidos partido = new Partidos();
+            partido.setUsuario(usuario); // Asigna el objeto Usuario en lugar del ID
+            partido.setFecha(fecha);
+            partido.setCategoria(categoria);
+            partidosRepositorio.save(partido);
+        }
     }
 
     // Método para listar partidos de un usuario específico
     public List<Partidos> listarPartidosPorUsuario(Long usuarioId) {
-        return partidosRepositorio.findAllByUsuarioIdOrderByFechaDesc(usuarioId);
+        Usuario usuario = usuarioServicio.obtenerUsuarioPorId(usuarioId);
+        return partidosRepositorio.findAllByUsuarioOrderByFechaDesc(usuario);
     }
 
     // Método para eliminar un partido por su ID
@@ -45,4 +53,3 @@ public class PartidosServicio {
         return partido.orElse(null); // Devuelve el partido o null si no se encuentra
     }
 }
-

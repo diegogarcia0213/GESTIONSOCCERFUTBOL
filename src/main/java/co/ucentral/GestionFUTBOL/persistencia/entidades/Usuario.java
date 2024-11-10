@@ -1,23 +1,29 @@
 package co.ucentral.GestionFUTBOL.persistencia.entidades;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre; // Campo para el nombre
+    private String nombre;
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Rol rol; // Uso del enum Rol
+    private Rol rol;
 
-    private String estadoSuscripcion = "Inactivo"; // Valor inicial para el estado de suscripción
+    private String estadoSuscripcion = "Inactivo";
 
-    // Getters y setters
+    // Relación con Partidos (un Usuario puede estar en varios Partidos)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Partidos> partidos;
+
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -64,6 +70,14 @@ public class Usuario {
 
     public void setEstadoSuscripcion(String estadoSuscripcion) {
         this.estadoSuscripcion = estadoSuscripcion;
+    }
+
+    public List<Partidos> getPartidos() {
+        return partidos;
+    }
+
+    public void setPartidos(List<Partidos> partidos) {
+        this.partidos = partidos;
     }
 }
 

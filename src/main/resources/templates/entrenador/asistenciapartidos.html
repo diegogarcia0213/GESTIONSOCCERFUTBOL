@@ -185,18 +185,17 @@
 </div>
 
 <!-- Contenido principal -->
+
 <div class="content">
     <h2>Asistencia Partidos</h2>
     <div class="table-container">
         <div class="training-item" th:each="partido : ${partidos}">
-            <span>Fecha: <span th:text="${partido.fecha}">2024-11-28</span></span> |
-            <span>Categoría: <span th:text="${partido.categoria}">Adultos</span></span>
-            <a th:href="@{/entrenador/fechaasistencia/{id}(id=${partido.id})}" class="select-button">Seleccionar</a>
+            <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span> |
+            <span>Categoría: <span th:text="${partido.categoria}">Categoría aquí</span></span>
+            <a th:href="@{/entrenador/fechaasistencia}" class="select-button">Seleccionar</a>
         </div>
     </div>
 </div>
-
 </body>
 </html>
-
 

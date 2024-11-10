@@ -14,8 +14,9 @@ public class Partidos {
 
     private String categoria;
 
-    @Column(name = "usuario_id", nullable = false)
-    private Long usuarioId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;  // Cambio para relacionar directamente con Usuario
 
     // Getters y Setters
     public Long getId() {
@@ -42,12 +43,11 @@ public class Partidos {
         this.categoria = categoria;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
-
