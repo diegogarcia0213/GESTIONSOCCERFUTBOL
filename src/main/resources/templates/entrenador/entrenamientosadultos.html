@@ -203,5 +203,13 @@
 </div>
 
 <h1>entrenamiento adultos</h1>
+<h1>Entrenamientos Adultos</h1>
+<ul>
+    <!-- Aquí se listarán las fechas de la categoría "adultos" desde la base de datos -->
+    <li th:each="entrenamiento : ${entrenamientos}">
+        <span th:text="${entrenamiento.fecha}"></span>
+        <button onclick="window.location.href='/mostraradultos?fecha=' + [[${entrenamiento.fecha}]]">Seleccionar</button>
+    </li>
+</ul>
 </body>
 </html>

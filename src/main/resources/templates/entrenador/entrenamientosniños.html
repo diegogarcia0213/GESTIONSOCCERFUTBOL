@@ -203,5 +203,15 @@
 </div>
 
 <h1>entrenamiento niños que onda wuey de los wuey</h1>
+<h1>Entrenamientos Niños</h1>
+<ul>
+    <!-- Iterar sobre la lista de fechas desde el controlador -->
+    <li th:each="entrenamiento : ${entrenamientos}">
+        <span th:text="${entrenamiento.fecha}">Fecha</span>
+        <button onclick="window.location.href='/mostrarniños?fecha=' + [[${entrenamiento.fecha}]]">Seleccionar</button>
+    </li>
+</ul>
+</ul>
+
 </body>
 </html>

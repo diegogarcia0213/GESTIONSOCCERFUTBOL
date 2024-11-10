@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Jugadores para la Fecha</title>
+</head>
+
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #3a0029;
+      color: #ffffff;
+  }
+  .container {
+      background-color: #fcf5e6;
+      padding: 20px;
+      border-radius: 10px;
+      width: 60%;
+      margin: auto;
+      color: #3a3a3a;
+  }
+  h1 {
+      text-align: center;
+      color: #2a2a72;
+  }
+  .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #fff3c4;
+      margin-bottom: 10px;
+      border-radius: 8px;
+  }
+  .btn {
+      background-color: #2a2a72;
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+  }
+  .btn:hover {
+      background-color: #1a1a5a;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Entrenamientos Adolescentes</h1>
+  <div th:each="entrenamiento : ${entrenamientos}">
+    <div class="item">
+      <span th:text="'Fecha: ' + ${entrenamiento.fecha}"></span>
+      <a th:href="@{/entrenador/entrenamientos/mostrar/adolescentes(fecha=${entrenamiento.fecha})}" class="btn">Seleccionar</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
