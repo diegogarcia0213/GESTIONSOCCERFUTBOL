@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
+
     Optional<Usuario> findByEmail(String email); // Busca un usuario por su email
 
     List<Usuario> findByRol(Rol rol); // Filtra usuarios por su rol
+
+    List<Usuario> findByRol(String rol); // Nuevo método para encontrar usuarios por rol como String
 }

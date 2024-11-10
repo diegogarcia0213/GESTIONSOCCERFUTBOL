@@ -5,6 +5,7 @@ import co.ucentral.GestionFUTBOL.persistencia.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,12 +19,28 @@ public class UsuarioServicio {
         return usuarioRepositorio.save(usuario); // Guarda el usuario en la base de datos
     }
 
+    // Método para validar credenciales
     public Optional<Usuario> validarCredenciales(String email, String password) {
         Optional<Usuario> usuario = usuarioRepositorio.findByEmail(email);
         if (usuario.isPresent() && usuario.get().getPassword().equals(password)) {
             return usuario;
         }
         return Optional.empty();
+    }
+
+    // Nuevo método para obtener usuarios por rol
+    public List<Usuario> obtenerUsuariosPorRol(String rol) {
+        return usuarioRepositorio.findByRol(rol);
+    }
+
+    // Nuevo método para obtener un usuario por ID
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioRepositorio.findById(id).orElse(null);
+    }
+
+    // Nuevo método para obtener todos los jugadores (usuarios con rol "JUGADOR")
+    public List<Usuario> obtenerTodosLosJugadores() {
+        return usuarioRepositorio.findByRol("JUGADOR");
     }
 }
 
