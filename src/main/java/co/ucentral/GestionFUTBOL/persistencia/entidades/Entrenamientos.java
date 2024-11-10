@@ -1,10 +1,7 @@
 package co.ucentral.GestionFUTBOL.persistencia.entidades;
 
-
-
 import jakarta.persistence.*;
-
-        import java.time.LocalDate;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Entrenamientos")
@@ -19,6 +16,9 @@ public class Entrenamientos {
 
     @Column(nullable = false, length = 20)
     private String categoria;
+
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuarioId;
 
     // Getters y setters
     public Long getId() {
@@ -43,5 +43,13 @@ public class Entrenamientos {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 }

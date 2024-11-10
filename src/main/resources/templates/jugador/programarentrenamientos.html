@@ -227,6 +227,9 @@
         <h2>Programar Entrenamientos</h2>
 
         <form th:action="@{/entrenamientos/registrar}" method="post">
+            <!-- Campo oculto para el usuarioId -->
+            <input type="hidden" name="usuarioId" th:value="${session.usuarioId}">
+
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha" name="fecha" required>
 

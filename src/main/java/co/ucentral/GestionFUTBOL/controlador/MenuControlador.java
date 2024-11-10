@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class MenuControlador {
 
@@ -44,10 +46,14 @@ public class MenuControlador {
     public String iniciarSesion(@RequestParam String email,
                                 @RequestParam String password,
                                 @RequestParam String rol,
-                                Model modelo) {
+                                Model modelo,
+                                HttpSession session) {
         return usuarioServicio.validarCredenciales(email, password)
                 .map(usuario -> {
                     if (usuario.getRol().name().equalsIgnoreCase(rol)) {
+                        // Guarda el usuarioId en la sesión
+                        session.setAttribute("usuarioId", usuario.getId());
+
                         if (rol.equalsIgnoreCase("JUGADOR")) {
                             return "redirect:/jugador/paginajugador"; // Redirige a la página del jugador en la carpeta 'jugador'
                         } else if (rol.equalsIgnoreCase("ENTRENADOR")) {
