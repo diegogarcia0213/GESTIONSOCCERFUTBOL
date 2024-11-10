@@ -1,6 +1,6 @@
 package co.ucentral.GestionFUTBOL.servicio;
 
-import co.ucentral.GestionFUTBOL.persistencia.repositorio.PartidoRepositorio;
+import co.ucentral.GestionFUTBOL.persistencia.repositorio.PartidosRepositorio;
 import co.ucentral.GestionFUTBOL.persistencia.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 public class AsistenciaServicio {
 
     @Autowired
-    private PartidoRepositorio partidoRepositorio;
+    private PartidosRepositorio partidoRepositorio;
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
