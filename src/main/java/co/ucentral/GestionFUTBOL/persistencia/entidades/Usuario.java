@@ -19,7 +19,6 @@ public class Usuario {
 
     private String estadoSuscripcion = "Inactivo";
 
-    // Relación con Partidos (un Usuario puede estar en varios Partidos)
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Partidos> partidos;
 
@@ -80,4 +79,5 @@ public class Usuario {
         this.partidos = partidos;
     }
 }
+
 

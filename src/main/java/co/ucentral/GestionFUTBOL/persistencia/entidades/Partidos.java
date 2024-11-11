@@ -16,7 +16,7 @@ public class Partidos {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;  // Cambio para relacionar directamente con Usuario
+    private Usuario usuario;
 
     // Getters y Setters
     public Long getId() {

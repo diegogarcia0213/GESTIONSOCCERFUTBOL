@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistencia Partidos</title>
+    <title>Partidos Adultos</title>
     <style>
-        /* Estilos generales y menú (copiados del código proporcionado) */
+        /* Estilos generales y menú */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -51,11 +51,6 @@
             background-color: #fbc02d;
         }
 
-        .button-3d:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
         .button-exit {
             background-color: #d32f2f;
         }
@@ -97,68 +92,35 @@
             color: white;
         }
 
-        /* Estilos para la tabla de partidos y lista de jugadores */
-        .table-container {
-            margin-top: 20px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        h2 {
+            color: #0d47a1;
             margin-bottom: 20px;
         }
 
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
+        /* Estilos para los elementos de los partidos */
+        .table-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        th {
-            background-color: #182968;
-            color: white;
+        .training-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: #fff8e1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .attendance-box {
-            width: 20px;
-            height: 20px;
-            border: 1px solid #333;
-            display: inline-block;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .attendance-box.checked-green {
-            background-color: green;
-        }
-
-        .attendance-box.checked-red {
-            background-color: red;
-        }
-
-        .save-button {
-            background-color: #2e7d32;
-            color: white;
+        .training-item span {
             font-weight: bold;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .save-button:hover {
-            background-color: #1b5e20;
-        }
-
-        .save-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            color: #333;
         }
     </style>
 </head>
@@ -202,6 +164,17 @@
     </div>
 </div>
 
-<h1>partidos adultos</h1>
+<!-- Contenido principal -->
+
+<div class="content">
+    <h2>Partidos Adultos</h2>
+    <div class="table-container">
+        <div class="training-item" th:each="partido : ${partidos}">
+            <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
+

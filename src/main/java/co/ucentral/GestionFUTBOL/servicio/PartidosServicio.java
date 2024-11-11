@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PartidosServicio {
@@ -42,14 +43,26 @@ public class PartidosServicio {
         partidosRepositorio.deleteById(id);
     }
 
-    // Nuevo método para listar todos los partidos
+    // Método para listar todos los partidos
     public List<Partidos> listarPartidos() {
         return partidosRepositorio.findAll();
     }
 
-    // Nuevo método para obtener un partido por su ID
+    // Método para obtener un partido por su ID
     public Partidos obtenerPartidoPorId(Long partidoId) {
         Optional<Partidos> partido = partidosRepositorio.findById(partidoId);
+
         return partido.orElse(null); // Devuelve el partido o null si no se encuentra
     }
+
+    // Método para obtener los partidos de la categoría "adultos" asociados a usuarios con rol "jugador"
+    public List<Partidos> obtenerPartidosAdultosPorJugadores() {
+        List<Partidos> partidosAdultos = partidosRepositorio.findByCategoria("adultos");
+        System.out.println("Partidos encontrados: " + partidosAdultos.size());
+        return partidosAdultos.stream()
+                .filter(partido -> partido.getUsuario().getRol().name().equalsIgnoreCase("jugador"))
+                .collect(Collectors.toList());
+    }
 }
+
+
