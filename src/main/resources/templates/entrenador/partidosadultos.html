@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partidos Adultos</title>
+    <title>Ver Partidos</title>
     <style>
         /* Estilos generales y menú */
         body {
@@ -26,16 +26,18 @@
         .header h1 {
             font-size: 24px;
             margin: 0;
+            flex-grow: 1;
+            text-align: left;
         }
 
-        .header .left-buttons,
-        .header .right-buttons {
+        .header .menu, .header .actions {
             display: flex;
+            align-items: center;
             gap: 15px;
         }
 
         .button-3d {
-            padding: 10px 20px;
+            padding: 8px 16px;
             font-size: 16px;
             font-weight: bold;
             color: white;
@@ -67,7 +69,7 @@
             display: none;
             position: absolute;
             background-color: white;
-            min-width: 200px;
+            min-width: 150px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
             z-index: 1;
@@ -75,9 +77,13 @@
 
         .dropdown-content a {
             color: #0d47a1;
-            padding: 12px 16px;
+            padding: 10px 16px;
             text-decoration: none;
             display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
         }
 
         .dropdown:hover .dropdown-content {
@@ -86,18 +92,15 @@
 
         .content {
             padding: 30px;
-            background-color: #521325;
-            min-height: calc(100vh - 70px);
             text-align: center;
-            color: white;
+            color: #1a237e;
         }
 
-        h2 {
-            color: #0d47a1;
+        .content h2 {
+            font-size: 24px;
             margin-bottom: 20px;
         }
 
-        /* Estilos para los elementos de los partidos */
         .table-container {
             max-width: 600px;
             margin: 0 auto;
@@ -109,7 +112,7 @@
 
         .training-item {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 15px;
             border-radius: 10px;
@@ -122,14 +125,30 @@
             font-weight: bold;
             color: #333;
         }
+
+        .select-button {
+            background-color: #3b5998;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .select-button:hover {
+            background-color: #4c70ba;
+        }
     </style>
 </head>
 <body>
 
-<!-- Cabecera -->
 <div class="header">
-    <div class="left-buttons">
-        <h1>Menú Principal Entrenador</h1>
+    <h1>Menú Principal Entrenador</h1>
+    <div class="menu">
+        <!-- Menú de opciones -->
         <div class="dropdown">
             <button class="button-3d">Ver Entrenamientos</button>
             <div class="dropdown-content">
@@ -156,25 +175,23 @@
             </div>
         </div>
 
-        <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/verpartidos}'|">Ver Partidos</button>
     </div>
-
-    <div class="right-buttons">
+    <div class="actions">
         <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>
 </div>
 
-<!-- Contenido principal -->
-
 <div class="content">
-    <h2>Partidos Adultos</h2>
+    <h2>Ver Partidos</h2>
     <div class="table-container">
         <div class="training-item" th:each="partido : ${partidos}">
-            <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span>
+            <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span> |
+            <span>Categoría: <span th:text="${partido.categoria}">Categoría aquí</span></span>
+            <a th:href="@{/entrenador/fechaasistencia}" class="select-button">Seleccionar</a>
         </div>
     </div>
 </div>
-
 </body>
 </html>
 

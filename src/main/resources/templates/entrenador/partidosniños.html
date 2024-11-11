@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistencia Partidos</title>
+    <title>Lista Fechas de Partidos Niños</title>
     <style>
-        /* Estilos generales y menú (copiados del código proporcionado) */
+        /* Estilos generales y menú */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -97,68 +97,31 @@
             color: white;
         }
 
-        /* Estilos para la tabla de partidos y lista de jugadores */
-        .table-container {
-            margin-top: 20px;
+        /* Estilos para la lista de fechas */
+        .fecha-list-container {
+            max-width: 600px;
+            margin: 20px auto;
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: black;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+        .fecha-list-container h2 {
+            font-size: 24px;
+            color: #182968;
         }
 
-        th, td {
+        .fecha-item {
             padding: 10px;
-            border: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
             text-align: left;
         }
 
-        th {
-            background-color: #182968;
-            color: white;
-        }
-
-        .attendance-box {
-            width: 20px;
-            height: 20px;
-            border: 1px solid #333;
-            display: inline-block;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .attendance-box.checked-green {
-            background-color: green;
-        }
-
-        .attendance-box.checked-red {
-            background-color: red;
-        }
-
-        .save-button {
-            background-color: #2e7d32;
-            color: white;
-            font-weight: bold;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .save-button:hover {
-            background-color: #1b5e20;
-        }
-
-        .save-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        .fecha-item:last-child {
+            border-bottom: none;
         }
     </style>
 </head>
@@ -202,6 +165,17 @@
     </div>
 </div>
 
-<h1>partidos niños 13/ 7777 - 96</h1>
+<!-- Contenido Principal -->
+<div class="content">
+    <div class="fecha-list-container">
+        <h2>Lista Fechas de Categoría Niños</h2>
+
+        <!-- Lista de fechas de partidos para categoría "niños" -->
+        <div th:each="partido : ${partidos}" th:if="${partido.categoria} == 'niños'" class="fecha-item">
+            <span th:text="${partido.fecha}">Fecha del partido</span>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

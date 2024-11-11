@@ -22,10 +22,10 @@ public class PartidosServicio {
 
     // Método para registrar un partido
     public void registrarPartido(Long usuarioId, LocalDate fecha, String categoria) {
-        Usuario usuario = usuarioServicio.obtenerUsuarioPorId(usuarioId); // Obtiene el objeto Usuario
+        Usuario usuario = usuarioServicio.obtenerUsuarioPorId(usuarioId);
         if (usuario != null) {
             Partidos partido = new Partidos();
-            partido.setUsuario(usuario); // Asigna el objeto Usuario en lugar del ID
+            partido.setUsuario(usuario);
             partido.setFecha(fecha);
             partido.setCategoria(categoria);
             partidosRepositorio.save(partido);
@@ -51,18 +51,38 @@ public class PartidosServicio {
     // Método para obtener un partido por su ID
     public Partidos obtenerPartidoPorId(Long partidoId) {
         Optional<Partidos> partido = partidosRepositorio.findById(partidoId);
+        return partido.orElse(null);
+    }
 
-        return partido.orElse(null); // Devuelve el partido o null si no se encuentra
+    // Método para obtener los partidos de una categoría específica
+    public List<Partidos> listarPartidosPorCategoria(String categoria) {
+        return partidosRepositorio.findByCategoria(categoria);
     }
 
     // Método para obtener los partidos de la categoría "adultos" asociados a usuarios con rol "jugador"
     public List<Partidos> obtenerPartidosAdultosPorJugadores() {
         List<Partidos> partidosAdultos = partidosRepositorio.findByCategoria("adultos");
-        System.out.println("Partidos encontrados: " + partidosAdultos.size());
         return partidosAdultos.stream()
                 .filter(partido -> partido.getUsuario().getRol().name().equalsIgnoreCase("jugador"))
                 .collect(Collectors.toList());
     }
+
+    // Método para obtener los partidos de la categoría "niños" asociados a usuarios con rol "jugador"
+    public List<Partidos> obtenerPartidosNinos() {
+        List<Partidos> partidosNinos = partidosRepositorio.findByCategoria("niños");
+        System.out.println("Número total de partidos de categoría 'niños': " + partidosNinos.size());
+
+        List<Partidos> partidosFiltrados = partidosNinos.stream()
+                .filter(partido -> {
+                    boolean esJugador = partido.getUsuario().getRol().name().equalsIgnoreCase("jugador");
+                    System.out.println("Partido ID: " + partido.getId() + ", Fecha: " + partido.getFecha() +
+                            ", Usuario Rol: " + partido.getUsuario().getRol().name() +
+                            ", Es Jugador: " + esJugador);
+                    return esJugador;
+                })
+                .collect(Collectors.toList());
+
+        System.out.println("Número de partidos de categoría 'niños' con rol 'jugador': " + partidosFiltrados.size());
+        return partidosFiltrados;
+    }
 }
-
-
