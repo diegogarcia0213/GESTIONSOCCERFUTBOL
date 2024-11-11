@@ -13,20 +13,20 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/entrenamientos")
 public class EntrenamientoControlador {
 
     @Autowired
     private EntrenamientoServicio entrenamientoServicio;
 
+    // Rutas de "jugador"
     // Muestra la página para programar entrenamientos
-    @GetMapping("/programar")
+    @GetMapping("/entrenamientos/programar")
     public String mostrarProgramarEntrenamientos() {
         return "jugador/programarentrenamientos";
     }
 
     // Maneja el registro de un entrenamiento y redirige a la página principal de jugador con mensaje
-    @PostMapping("/registrar")
+    @PostMapping("/entrenamientos/registrar")
     public String registrarEntrenamiento(@RequestParam("usuarioId") Long usuarioId,
                                          @RequestParam("fecha") String fecha,
                                          @RequestParam("categoria") String categoria,
@@ -37,7 +37,7 @@ public class EntrenamientoControlador {
     }
 
     // Muestra la página de mis entrenamientos con la lista de entrenamientos
-    @GetMapping("/mis")
+    @GetMapping("/entrenamientos/mis")
     public String mostrarMisEntrenamientos(HttpSession session, Model model) {
         Long usuarioId = (Long) session.getAttribute("usuarioId"); // Obtiene el usuarioId desde la sesión
         List<Entrenamientos> entrenamientos = entrenamientoServicio.listarEntrenamientosPorUsuario(usuarioId);
@@ -46,9 +46,20 @@ public class EntrenamientoControlador {
     }
 
     // Maneja la eliminación de un entrenamiento por su ID
-    @PostMapping("/eliminar/{id}")
+    @PostMapping("/entrenamientos/eliminar/{id}")
     public String eliminarEntrenamiento(@PathVariable Long id) {
         entrenamientoServicio.eliminarEntrenamiento(id);
         return "redirect:/entrenamientos/mis";
     }
+
+    // Rutas de "entrenador"
+    // Filtra y muestra los entrenamientos según la categoría seleccionada para el rol de entrenador
+    @GetMapping("/entrenador/entrenamientos/ver/{categoria}")
+    public String mostrarEntrenamientosPorCategoria(@PathVariable("categoria") String categoria, Model model) {
+        List<Entrenamientos> entrenamientos = entrenamientoServicio.listarEntrenamientosPorCategoria(categoria);
+        model.addAttribute("entrenamientos", entrenamientos);
+        model.addAttribute("categoriaSeleccionada", categoria);
+        return "entrenador/entrenamientos";
+    }
 }
+
