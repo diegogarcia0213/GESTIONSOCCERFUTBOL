@@ -19,8 +19,13 @@ public class Usuario {
 
     private String estadoSuscripcion = "Inactivo";
 
+    // Relación OneToMany con Partidos
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Partidos> partidos;
+
+    // Relación OneToMany con Entrenamientos
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Entrenamientos> entrenamientos;
 
     // Getters y Setters
     public Long getId() {
@@ -78,6 +83,12 @@ public class Usuario {
     public void setPartidos(List<Partidos> partidos) {
         this.partidos = partidos;
     }
+
+    public List<Entrenamientos> getEntrenamientos() {
+        return entrenamientos;
+    }
+
+    public void setEntrenamientos(List<Entrenamientos> entrenamientos) {
+        this.entrenamientos = entrenamientos;
+    }
 }
-
-

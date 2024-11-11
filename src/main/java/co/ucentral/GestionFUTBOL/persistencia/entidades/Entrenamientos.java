@@ -11,14 +11,16 @@ public class Entrenamientos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+
     private LocalDate fecha;
 
-    @Column(nullable = false, length = 20)
+
     private String categoria;
 
-    @Column(name = "usuario_id", nullable = false)
-    private Long usuarioId;
+    // Relación ManyToOne con Usuario
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     // Getters y setters
     public Long getId() {
@@ -45,11 +47,11 @@ public class Entrenamientos {
         this.categoria = categoria;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
