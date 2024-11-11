@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Partidos</title>
     <style>
-        /* Estilos generales y menú */
+        /* Estilo global */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #521325;
+            background-color: #e3f2fd;
         }
 
+        /* Estilo de la cabecera */
         .header {
             display: flex;
             justify-content: space-between;
@@ -26,8 +27,12 @@
         .header h1 {
             font-size: 24px;
             margin: 0;
-            flex-grow: 1;
-            text-align: left;
+        }
+
+        .header .left-buttons,
+        .header .right-buttons {
+            display: flex;
+            gap: 15px;
         }
 
         .button-3d, .button-exit, .search-button {
@@ -50,6 +55,11 @@
             background-color: #fbc02d;
         }
 
+        .button-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
         .button-exit {
             background-color: #d32f2f;
             color: white;
@@ -68,16 +78,46 @@
             background-color: #c49000;
         }
 
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #0d47a1;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Contenido */
         .content {
             padding: 30px;
             text-align: center;
             color: #1a237e;
+            background-color: #521325;
+            min-height: calc(100vh - 70px);
         }
 
+        /* ComboBox y Botón */
         .combo-container {
             margin-bottom: 20px;
         }
 
+        /* Tabla de Partidos */
         .table-container {
             max-width: 600px;
             margin: 0 auto;
@@ -101,13 +141,34 @@
 </head>
 <body>
 
+<!-- Cabecera -->
 <div class="header">
-    <h1>Menú Principal Entrenador</h1>
-    <div class="menu">
-        <!-- Menú de opciones -->
+    <div class="left-buttons">
+        <h1>Menú Principal Entrenador</h1>
+
+
+        <button class="button-3d" th:onclick="|location.href='@{entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
+
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
+
+        <div class="dropdown">
+            <button class="button-3d">Jugadores</button>
+            <div class="dropdown-content">
+                <a th:href="@{/entrenador/lista}">Lista Jugadores</a>
+                <a th:href="@{/entrenador/pago}">Registrar Pago</a>
+            </div>
+        </div>
+
+
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
+    </div>
+
+    <div class="right-buttons">
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/'|">Salir</button>
     </div>
 </div>
 
+<!-- Contenido Principal -->
 <div class="content">
     <h2>Categoría Partidos</h2>
 
@@ -138,3 +199,4 @@
 
 </body>
 </html>
+

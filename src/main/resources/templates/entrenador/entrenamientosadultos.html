@@ -164,27 +164,14 @@
 </head>
 <body>
 
-<!-- Cabecera -->
 <div class="header">
     <div class="left-buttons">
         <h1>Menú Principal Entrenador</h1>
-        <div class="dropdown">
-            <button class="button-3d">Ver Entrenamientos</button>
-            <div class="dropdown-content">
-                <a th:href="@{/entrenador/entrenamientos/ver/ninos}">Niños</a>
-                <a th:href="@{/entrenador/entrenamientos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/entrenador/entrenamientos/ver/adultos}">Adultos</a>
-            </div>
-        </div>
 
-        <div class="dropdown">
-            <button class="button-3d">Ver Partidos</button>
-            <div class="dropdown-content">
-                <a th:href="@{/entrenador/partidos/ver/ninos}">Niños</a>
-                <a th:href="@{/entrenador/partidos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/entrenador/partidos/ver/adultos}">Adultos</a>
-            </div>
-        </div>
+
+        <button class="button-3d" th:onclick="|location.href='@{entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
+
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
 
         <div class="dropdown">
             <button class="button-3d">Jugadores</button>
@@ -194,9 +181,14 @@
             </div>
         </div>
 
+
         <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
     </div>
 
+    <div class="right-buttons">
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/'|">Salir</button>
+    </div>
+</div>
     <div class="right-buttons">
         <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>

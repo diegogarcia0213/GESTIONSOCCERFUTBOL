@@ -24,6 +24,6 @@ public class VerPartidosControlador {
         List<Partidos> partidos = partidosServicio.listarPartidosPorCategoria(categoria);
         model.addAttribute("partidos", partidos);
         model.addAttribute("categoriaSeleccionada", categoria);
-        return "entrenador/partidosadultos";
+        return "entrenador/partidos";
     }
 }

@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistencia Partidos</title>
+    <title>Ver Partidos</title>
     <style>
-        /* Estilos generales y menú */
+        /* Estilo global */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #521325; /* Fondo oscuro */
+            background-color: #e3f2fd;
         }
 
-        /* Cabecera */
+        /* Estilo de la cabecera */
         .header {
             display: flex;
             justify-content: space-between;
@@ -27,39 +27,55 @@
         .header h1 {
             font-size: 24px;
             margin: 0;
-            flex-grow: 1;
-            text-align: left;
         }
 
-        .header .menu, .header .actions {
+        .header .left-buttons,
+        .header .right-buttons {
             display: flex;
-            align-items: center;
             gap: 15px;
         }
 
-        .button-3d {
-            padding: 8px 16px;
+        .button-3d, .button-exit, .search-button {
+            padding: 10px 20px;
             font-size: 16px;
             font-weight: bold;
-            color: white;
             border: none;
             border-radius: 8px;
-            background-color: #182968;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-3d {
+            background-color: #182968;
+            color: white;
         }
 
         .button-3d:hover {
             background-color: #fbc02d;
         }
 
+        .button-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
         .button-exit {
             background-color: #d32f2f;
+            color: white;
         }
 
         .button-exit:hover {
             background-color: #ff5252;
+        }
+
+        .search-button {
+            background-color: #fbc02d;
+            color: black;
+        }
+
+        .search-button:hover {
+            background-color: #c49000;
         }
 
         .dropdown {
@@ -70,7 +86,7 @@
             display: none;
             position: absolute;
             background-color: white;
-            min-width: 150px;
+            min-width: 200px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
             z-index: 1;
@@ -78,31 +94,30 @@
 
         .dropdown-content a {
             color: #0d47a1;
-            padding: 10px 16px;
+            padding: 12px 16px;
             text-decoration: none;
             display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
         }
 
         .dropdown:hover .dropdown-content {
             display: block;
         }
 
-        /* Contenido principal */
+        /* Contenido */
         .content {
             padding: 30px;
             text-align: center;
             color: #1a237e;
+            background-color: #521325;
+            min-height: calc(100vh - 70px);
         }
 
-        .content h2 {
-            font-size: 24px;
+        /* ComboBox y Botón */
+        .combo-container {
             margin-bottom: 20px;
         }
 
+        /* Tabla de Partidos */
         .table-container {
             max-width: 600px;
             margin: 0 auto;
@@ -123,13 +138,9 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .training-item span {
-            font-weight: bold;
-            color: #333;
-        }
-
+        /* Botón Seleccionar en azul cielo 3D */
         .select-button {
-            background-color: #3b5998; /* Azul para botón seleccionar */
+            background-color: #182968;
             color: white;
             font-weight: bold;
             padding: 10px 20px;
@@ -141,7 +152,12 @@
         }
 
         .select-button:hover {
-            background-color: #4c70ba;
+            background-color: #059e66;
+        }
+
+        .select-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -149,25 +165,11 @@
 
 <!-- Cabecera -->
 <div class="header">
-    <h1>Menú Principal Entrenador</h1>
-    <div class="menu">
-        <div class="dropdown">
-            <button class="button-3d">Ver Entrenamientos</button>
-            <div class="dropdown-content">
-                <a th:href="@{/entrenador/entrenamientos/ver/ninos}">Niños</a>
-                <a th:href="@{/entrenador/entrenamientos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/entrenador/entrenamientos/ver/adultos}">Adultos</a>
-            </div>
-        </div>
+    <div class="left-buttons">
+        <h1>Menú Principal Entrenador</h1>
 
-        <div class="dropdown">
-            <button class="button-3d">Ver Partidos</button>
-            <div class="dropdown-content">
-                <a th:href="@{/entrenador/partidos/ver/ninos}">Niños</a>
-                <a th:href="@{/entrenador/partidos/ver/adolecentes}">Adolescentes</a>
-                <a th:href="@{/entrenador/partidos/ver/adultos}">Adultos</a>
-            </div>
-        </div>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
 
         <div class="dropdown">
             <button class="button-3d">Jugadores</button>
@@ -179,13 +181,13 @@
 
         <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
     </div>
-    <div class="actions">
-        <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
+
+    <div class="right-buttons">
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/'|">Salir</button>
     </div>
 </div>
 
 <!-- Contenido principal -->
-
 <div class="content">
     <h2>Asistencia Partidos</h2>
     <div class="table-container">
@@ -196,6 +198,7 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
 
