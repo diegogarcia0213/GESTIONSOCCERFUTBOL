@@ -59,18 +59,18 @@ public class PartidosServicio {
         return partidosRepositorio.findByCategoria(categoria);
     }
 
-    // Método para obtener los partidos de la categoría "adultos" asociados a usuarios con rol "jugador"
+    // Método para obtener los partidos de la categoría "Adultos" asociados a usuarios con rol "Jugador"
     public List<Partidos> obtenerPartidosAdultosPorJugadores() {
-        List<Partidos> partidosAdultos = partidosRepositorio.findByCategoria("adultos");
+        List<Partidos> partidosAdultos = partidosRepositorio.findByCategoria("Adultos");
         return partidosAdultos.stream()
                 .filter(partido -> partido.getUsuario().getRol().name().equalsIgnoreCase("jugador"))
                 .collect(Collectors.toList());
     }
 
-    // Método para obtener los partidos de la categoría "niños" asociados a usuarios con rol "jugador"
+    // Método para obtener los partidos de la categoría "Niños" asociados a usuarios con rol "Jugador"
     public List<Partidos> obtenerPartidosNinos() {
-        List<Partidos> partidosNinos = partidosRepositorio.findByCategoria("niños");
-        System.out.println("Número total de partidos de categoría 'niños': " + partidosNinos.size());
+        List<Partidos> partidosNinos = partidosRepositorio.findByCategoria("Niños");
+        System.out.println("Número total de partidos de categoría 'Niños': " + partidosNinos.size());
 
         List<Partidos> partidosFiltrados = partidosNinos.stream()
                 .filter(partido -> {
@@ -82,7 +82,7 @@ public class PartidosServicio {
                 })
                 .collect(Collectors.toList());
 
-        System.out.println("Número de partidos de categoría 'niños' con rol 'jugador': " + partidosFiltrados.size());
+        System.out.println("Número de partidos de categoría 'Niños' con rol 'Jugador': " + partidosFiltrados.size());
         return partidosFiltrados;
     }
 }
