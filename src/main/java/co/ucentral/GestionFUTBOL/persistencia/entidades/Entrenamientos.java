@@ -11,15 +11,13 @@ public class Entrenamientos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private LocalDate fecha;
-
 
     private String categoria;
 
-    // Relación ManyToOne con Usuario
+    // Relación ManyToOne con Usuario (nullable = true temporalmente)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = true) // Cambiado a true temporalmente
     private Usuario usuario;
 
     // Getters y setters
