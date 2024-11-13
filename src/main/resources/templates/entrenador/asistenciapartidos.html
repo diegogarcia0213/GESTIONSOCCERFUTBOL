@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Partidos</title>
+    <title>Asistencia de Partidos</title>
     <style>
         /* Estilo global */
         body {
@@ -53,11 +53,6 @@
 
         .button-3d:hover {
             background-color: #fbc02d;
-        }
-
-        .button-3d:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .button-exit {
@@ -112,12 +107,7 @@
             min-height: calc(100vh - 70px);
         }
 
-        /* ComboBox y Botón */
-        .combo-container {
-            margin-bottom: 20px;
-        }
-
-        /* Tabla de Partidos */
+        /* Contenedor de la tabla */
         .table-container {
             max-width: 600px;
             margin: 0 auto;
@@ -137,28 +127,6 @@
             background-color: #fff8e1;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        /* Botón Seleccionar en azul cielo 3D */
-        .select-button {
-            background-color: #182968;
-            color: white;
-            font-weight: bold;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .select-button:hover {
-            background-color: #059e66;
-        }
-
-        .select-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
     </style>
 </head>
 <body>
@@ -167,12 +135,8 @@
 <div class="header">
     <div class="left-buttons">
         <h1>Menú Principal Entrenador</h1>
-
-
         <button class="button-3d" th:onclick="|location.href='@{/entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
-
         <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
-
         <div class="dropdown">
             <button class="button-3d">Jugadores</button>
             <div class="dropdown-content">
@@ -180,27 +144,29 @@
                 <a th:href="@{/entrenador/pago}">Registrar Pago</a>
             </div>
         </div>
-
-
         <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
     </div>
-
     <div class="right-buttons">
         <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
     </div>
 </div>
+
 <!-- Contenido principal -->
 <div class="content">
     <h2>Asistencia Partidos</h2>
     <div class="table-container">
-        <div class="training-item" th:each="partido : ${partidos}">
-            <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span> |
-            <span>Categoría: <span th:text="${partido.categoria}">Categoría aquí</span></span>
-            <a th:href="@{/entrenador/fechaasistencia}" class="select-button">Seleccionar</a>
-        </div>
+        <form id="buscar-form" th:action="@{/entrenador/fechaasistencia}" method="get">
+            <div class="training-item" th:each="partido : ${partidos}">
+                <input type="radio" name="selectedPartido" th:value="${partido.id}" required />
+                <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span> |
+                <span>Categoría: <span th:text="${partido.categoria}">Categoría aquí</span></span>
+            </div>
+            <button type="submit" class="search-button">Buscar</button>
+        </form>
     </div>
 </div>
 
 </body>
 </html>
+
 
