@@ -18,10 +18,6 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
     List<Usuario> findByRol(String rol); // Nuevo método para encontrar usuarios por rol como String
 
-    // Consulta personalizada para encontrar usuarios que hayan seleccionado una fecha específica en una categoría
-    @Query("SELECT u FROM Usuario u JOIN u.entrenamientos e " +
-            "WHERE e.fecha = :fecha AND e.categoria = :categoria AND u.rol = 'JUGADOR'")
-    List<Usuario> findUsuariosByFechaAndCategoria(@Param("fecha") LocalDate fecha, @Param("categoria") String categoria);
 
     // Método para encontrar usuarios asociados a un partido específico
     @Query("SELECT u FROM Usuario u JOIN u.partidos p WHERE p.id = :partidoId")
