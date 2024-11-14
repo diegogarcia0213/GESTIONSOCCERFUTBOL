@@ -1,7 +1,6 @@
 package co.ucentral.GestionFUTBOL.controlador;
 
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Usuario;
-import co.ucentral.GestionFUTBOL.persistencia.entidades.Rol;
 import co.ucentral.GestionFUTBOL.persistencia.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class RegistrarPagosControlador {
 
     @GetMapping("/pago")
     public String mostrarRegistrarPago(Model model) {
-        List<Usuario> jugadores = usuarioRepositorio.findByRol(Rol.JUGADOR);
+        List<Usuario> jugadores = usuarioRepositorio.findByRol(Usuario.Rol.JUGADOR);
         model.addAttribute("jugadores", jugadores);
         return "entrenador/registrarpagos";
     }
@@ -41,7 +40,7 @@ public class RegistrarPagosControlador {
 
     @GetMapping("/lista")
     public String listarJugadores(Model model) {
-        List<Usuario> jugadores = usuarioRepositorio.findByRol(Rol.JUGADOR);
+        List<Usuario> jugadores = usuarioRepositorio.findByRol(Usuario.Rol.JUGADOR);
         model.addAttribute("jugadores", jugadores);
         return "entrenador/listajugadores";
     }

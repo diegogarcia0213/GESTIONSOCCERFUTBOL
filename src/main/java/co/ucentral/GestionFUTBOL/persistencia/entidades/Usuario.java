@@ -91,4 +91,9 @@ public class Usuario {
     public void setEntrenamientos(List<Entrenamientos> entrenamientos) {
         this.entrenamientos = entrenamientos;
     }
+
+    public enum Rol {
+        JUGADOR,
+        ENTRENADOR
+    }
 }
