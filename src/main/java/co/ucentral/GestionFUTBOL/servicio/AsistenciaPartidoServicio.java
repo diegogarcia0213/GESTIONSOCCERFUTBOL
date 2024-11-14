@@ -3,7 +3,7 @@ package co.ucentral.GestionFUTBOL.servicio;
 import co.ucentral.GestionFUTBOL.persistencia.entidades.AsistenciaPartido;
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Partidos;
 import co.ucentral.GestionFUTBOL.persistencia.entidades.Usuario;
-import co.ucentral.GestionFUTBOL.persistencia.repositorios.AsistenciaPartidoRepositorio;
+import co.ucentral.GestionFUTBOL.persistencia.repositorio.AsistenciaPartidoRepositorio;
 import co.ucentral.GestionFUTBOL.persistencia.repositorio.PartidosRepositorio;
 import co.ucentral.GestionFUTBOL.persistencia.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;

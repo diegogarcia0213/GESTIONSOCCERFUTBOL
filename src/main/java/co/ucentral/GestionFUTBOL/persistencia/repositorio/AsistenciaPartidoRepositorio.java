@@ -1,4 +1,4 @@
-package co.ucentral.GestionFUTBOL.persistencia.repositorios;
+package co.ucentral.GestionFUTBOL.persistencia.repositorio;
 
 import co.ucentral.GestionFUTBOL.persistencia.entidades.AsistenciaPartido;
 import org.springframework.data.jpa.repository.JpaRepository;
