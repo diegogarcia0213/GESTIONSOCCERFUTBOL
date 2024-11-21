@@ -59,30 +59,5 @@ public class PartidosServicio {
         return partidosRepositorio.findByCategoria(categoria);
     }
 
-    // Método para obtener los partidos de la categoría "Adultos" asociados a usuarios con rol "Jugador"
-    public List<Partidos> obtenerPartidosAdultosPorJugadores() {
-        List<Partidos> partidosAdultos = partidosRepositorio.findByCategoria("Adultos");
-        return partidosAdultos.stream()
-                .filter(partido -> partido.getUsuario().getRol().name().equalsIgnoreCase("jugador"))
-                .collect(Collectors.toList());
-    }
 
-    // Método para obtener los partidos de la categoría "Niños" asociados a usuarios con rol "Jugador"
-    public List<Partidos> obtenerPartidosNinos() {
-        List<Partidos> partidosNinos = partidosRepositorio.findByCategoria("Niños");
-        System.out.println("Número total de partidos de categoría 'Niños': " + partidosNinos.size());
-
-        List<Partidos> partidosFiltrados = partidosNinos.stream()
-                .filter(partido -> {
-                    boolean esJugador = partido.getUsuario().getRol().name().equalsIgnoreCase("jugador");
-                    System.out.println("Partido ID: " + partido.getId() + ", Fecha: " + partido.getFecha() +
-                            ", Usuario Rol: " + partido.getUsuario().getRol().name() +
-                            ", Es Jugador: " + esJugador);
-                    return esJugador;
-                })
-                .collect(Collectors.toList());
-
-        System.out.println("Número de partidos de categoría 'Niños' con rol 'Jugador': " + partidosFiltrados.size());
-        return partidosFiltrados;
-    }
 }

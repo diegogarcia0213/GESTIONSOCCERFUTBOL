@@ -22,6 +22,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
     // Método para encontrar usuarios asociados a un partido específico
     @Query("SELECT u FROM Usuario u JOIN u.partidos p WHERE p.id = :partidoId")
     List<Usuario> findByPartidosId(@Param("partidoId") Long partidoId);
+
 }
 
 
