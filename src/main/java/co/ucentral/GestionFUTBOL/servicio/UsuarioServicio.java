@@ -28,19 +28,12 @@ public class UsuarioServicio {
         return Optional.empty();
     }
 
-    // Nuevo método para obtener usuarios por rol
-    public List<Usuario> obtenerUsuariosPorRol(String rol) {
-        return usuarioRepositorio.findByRol(rol);
-    }
 
     // Nuevo método para obtener un usuario por ID
     public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioRepositorio.findById(id).orElse(null);
     }
 
-    // Nuevo método para obtener todos los jugadores (usuarios con rol "JUGADOR")
-    public List<Usuario> obtenerTodosLosJugadores() {
-        return usuarioRepositorio.findByRol("JUGADOR");
-    }
+
 }
 
