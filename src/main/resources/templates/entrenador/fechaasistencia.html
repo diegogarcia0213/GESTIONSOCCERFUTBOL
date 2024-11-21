@@ -5,131 +5,254 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asistencia para el Partido</title>
     <style>
-        /* Estilo global */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e3f2fd;
-        }
+        <style>
+    /* Estilo global */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #e3f2fd;
+    }
 
-        /* Estilo de la cabecera */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: #182968;
-            color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+    /* Estilo de la cabecera */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #182968;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-        .header h1 {
-            font-size: 24px;
-            margin: 0;
-        }
+    .header h1 {
+        font-size: 24px;
+        margin: 0;
+    }
 
-        .button-3d, .button-exit, .save-button, .back-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, transform 0.2s;
-        }
+    .header .left-buttons,
+    .header .right-buttons {
+        display: flex;
+        gap: 15px;
+    }
 
-        .button-3d {
-            background-color: #182968;
-            color: white;
-        }
+    .button-3d, .button-exit, .search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.2s;
+    }
 
-        .button-3d:hover {
-            background-color: #fbc02d;
-        }
+    .button-3d {
+        background-color: #182968;
+        color: white;
+    }
 
-        .button-exit {
-            background-color: #d32f2f;
-            color: white;
-        }
+    .button-3d:hover {
+        background-color: #fbc02d;
+    }
 
-        .button-exit:hover {
-            background-color: #ff5252;
-        }
+    .button-exit {
+        background-color: #d32f2f;
+        color: white;
+    }
 
-        .save-button {
-            background-color: #2e7d32;
-            color: white;
-        }
+    .button-exit:hover {
+        background-color: #ff5252;
+    }
 
-        .save-button:hover {
-            background-color: #1b5e20;
-        }
+    .search-button {
+        background-color: #fbc02d;
+        color: black;
+    }
 
-        .back-button {
-            background-color: #d32f2f;
-            color: white;
-        }
+    .search-button:hover {
+        background-color: #c49000;
+    }
 
-        .back-button:hover {
-            background-color: #ff5252;
-        }
+    .dropdown {
+        position: relative;
+    }
 
-        .content {
-            padding: 30px;
-            text-align: center;
-            color: #1a237e;
-            background-color: #521325;
-            min-height: calc(100vh - 70px);
-        }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        z-index: 1;
+    }
 
-        .table-container {
-            margin-top: 20px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+    .dropdown-content a {
+        color: #0d47a1;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
+    /* Contenido */
+    .content {
+        padding: 30px;
+        text-align: center;
+        color: #1a237e;
+        background-color: #521325;
+        min-height: calc(100vh - 70px);
+    }
 
-        th {
-            background-color: #182968;
-            color: white;
-        }
+    /* Contenedor de la tabla */
+    .table-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff8e1;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-        .attendance-select {
-            width: 100%;
-            padding: 5px;
-            border-radius: 4px;
-            text-align: center;
-        }
+    .training-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        background-color: #fff8e1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    /* Estilo global */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #e3f2fd;
+    }
 
-        .asistencia-verde {
-            background-color: green;
-            color: white;
-            padding: 5px;
-            text-align: center;
-            border-radius: 4px;
-        }
+    /* Estilo de la cabecera */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #182968;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-        .asistencia-roja {
-            background-color: red;
-            color: white;
-            padding: 5px;
-            text-align: center;
-            border-radius: 4px;
-        }
+    .header h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .button-3d, .button-exit, .save-button, .back-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button-3d {
+        background-color: #182968;
+        color: white;
+    }
+
+    .button-3d:hover {
+        background-color: #fbc02d;
+    }
+
+    .button-exit {
+        background-color: #d32f2f;
+        color: white;
+    }
+
+    .button-exit:hover {
+        background-color: #ff5252;
+    }
+
+    .save-button {
+        background-color: #2e7d32;
+        color: white;
+    }
+
+    .save-button:hover {
+        background-color: #1b5e20;
+    }
+
+    .back-button {
+        background-color: #d32f2f;
+        color: white;
+    }
+
+    .back-button:hover {
+        background-color: #ff5252;
+    }
+
+    .content {
+        padding: 30px;
+        text-align: center;
+        color: #1a237e;
+        background-color: #521325;
+        min-height: calc(100vh - 70px);
+    }
+
+    .table-container {
+        margin-top: 20px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #182968;
+        color: white;
+    }
+
+    .attendance-select {
+        width: 100%;
+        padding: 5px;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .asistencia-verde {
+        background-color: green;
+        color: white;
+        padding: 5px;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .asistencia-roja {
+        background-color: red;
+        color: white;
+        padding: 5px;
+        text-align: center;
+        border-radius: 4px;
+    }
     </style>
 </head>
 <body>
