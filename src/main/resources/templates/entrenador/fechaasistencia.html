@@ -29,12 +29,6 @@
             margin: 0;
         }
 
-        .header .left-buttons,
-        .header .right-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
         .button-3d, .button-exit, .save-button, .back-button {
             padding: 10px 20px;
             font-size: 16px;
@@ -82,32 +76,6 @@
             background-color: #ff5252;
         }
 
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: #0d47a1;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Contenido principal */
         .content {
             padding: 30px;
             text-align: center;
@@ -116,7 +84,6 @@
             min-height: calc(100vh - 70px);
         }
 
-        /* Tabla de asistencia */
         .table-container {
             margin-top: 20px;
             background-color: white;
@@ -141,13 +108,27 @@
             color: white;
         }
 
-        /* Estilo de la casilla de asistencia */
         .attendance-select {
             width: 100%;
             padding: 5px;
-            border-radius: 50px;
-            font-weight: bold;
+            border-radius: 4px;
             text-align: center;
+        }
+
+        .asistencia-verde {
+            background-color: green;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .asistencia-roja {
+            background-color: red;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -193,8 +174,8 @@
                 <tr th:each="jugador : ${jugadores}">
                     <td th:text="${jugador.nombre}">Nombre</td>
                     <td>
-                        <select name="asistencias[${jugador.id}]" class="attendance-select" required>
-                            <option value="0">Sin marcar</option>
+                        <select th:name="'asistencias[' + ${jugador.id} + ']'" class="attendance-select" required>
+                            <option value="" disabled selected>Seleccione</option>
                             <option value="1">Asistió</option>
                             <option value="2">Faltó</option>
                         </select>
@@ -208,6 +189,32 @@
                 <button type="button" class="back-button" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Volver</button>
             </div>
         </form>
+    </div>
+
+    <!-- Resumen de asistencias -->
+    <div class="table-container" style="margin-top: 30px;">
+        <h3>Resumen de Asistencias</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Jugador</th>
+                <th>Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="asistencia : ${listaAsistencias}">
+                <td th:text="${asistencia.jugador.nombre}">Nombre</td>
+                <td>
+                    <div th:if="${asistencia.asistencia == 'Asistió'}" class="asistencia-verde">
+                        Asistió
+                    </div>
+                    <div th:if="${asistencia.asistencia == 'Faltó'}" class="asistencia-roja">
+                        Faltó
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

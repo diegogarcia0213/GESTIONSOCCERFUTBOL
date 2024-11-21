@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class AsistenciaPartidoServicio {
@@ -36,11 +37,16 @@ public class AsistenciaPartidoServicio {
         return usuarioRepositorio.findByPartidosId(partidoId);
     }
 
-    public void guardarAsistencias(Map<Long, Integer> asistencias, Long partidoId) {
+    public List<AsistenciaPartido> obtenerAsistenciasPorPartido(Long partidoId) {
+        return asistenciaPartidoRepositorio.findByPartidoId(partidoId);
+    }
+
+    public void guardarAsistencias(Map<Long, String> asistencias, Long partidoId) {
         Partidos partido = obtenerPartidoPorId(partidoId);
-        for (Map.Entry<Long, Integer> entry : asistencias.entrySet()) {
+
+        for (Map.Entry<Long, String> entry : asistencias.entrySet()) {
             Long jugadorId = entry.getKey();
-            Integer estadoAsistencia = entry.getValue();
+            String estadoAsistencia = entry.getValue();
 
             Usuario jugador = usuarioRepositorio.findById(jugadorId).orElse(null);
             if (jugador != null) {
@@ -53,4 +59,3 @@ public class AsistenciaPartidoServicio {
         }
     }
 }
-

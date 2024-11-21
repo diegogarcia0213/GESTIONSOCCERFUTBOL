@@ -1,7 +1,5 @@
 package co.ucentral.GestionFUTBOL.persistencia.entidades;
 
-
-
 import jakarta.persistence.*;
 
 @Entity
@@ -20,7 +18,7 @@ public class AsistenciaPartido {
     private Usuario jugador;
 
     @Column(nullable = true)
-    private Integer asistencia; // 1 = Asistió (verde), 2 = Faltó (rojo), null = No marcado (blanco)
+    private String asistencia; // "Asistió" o "Faltó"
 
     // Getters y Setters
     public Long getId() {
@@ -47,11 +45,12 @@ public class AsistenciaPartido {
         this.jugador = jugador;
     }
 
-    public Integer getAsistencia() {
+    public String getAsistencia() {
         return asistencia;
     }
 
-    public void setAsistencia(Integer asistencia) {
+    public void setAsistencia(String asistencia) {
         this.asistencia = asistencia;
     }
 }
+

@@ -27,6 +27,10 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Entrenamientos> entrenamientos;
 
+    // Relación OneToMany con AsistenciaPartido
+    @OneToMany(mappedBy = "jugador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AsistenciaPartido> asistencias;
+
     // Getters y Setters
     public Long getId() {
         return id;
@@ -92,8 +96,17 @@ public class Usuario {
         this.entrenamientos = entrenamientos;
     }
 
+    public List<AsistenciaPartido> getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(List<AsistenciaPartido> asistencias) {
+        this.asistencias = asistencias;
+    }
+
     public enum Rol {
         JUGADOR,
         ENTRENADOR
     }
 }
+

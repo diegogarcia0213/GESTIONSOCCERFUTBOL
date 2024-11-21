@@ -2,6 +2,7 @@ package co.ucentral.GestionFUTBOL.persistencia.entidades;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Partidos {
@@ -17,6 +18,10 @@ public class Partidos {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+
+    // Relación OneToMany con AsistenciaPartido
+    @OneToMany(mappedBy = "partido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AsistenciaPartido> asistencias;
 
     // Getters y Setters
     public Long getId() {
@@ -50,4 +55,13 @@ public class Partidos {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public List<AsistenciaPartido> getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(List<AsistenciaPartido> asistencias) {
+        this.asistencias = asistencias;
+    }
 }
+
