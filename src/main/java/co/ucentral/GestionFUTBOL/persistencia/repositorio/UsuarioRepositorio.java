@@ -10,16 +10,18 @@ import java.util.Optional;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
-    Optional<Usuario> findByEmail(String email); // Busca un usuario por su email
+    // Busca un usuario por su email
+    Optional<Usuario> findByEmail(String email);
 
-    List<Usuario> findByRol(Usuario.Rol rol); // Filtra usuarios por su rol
+    // Filtra usuarios por su rol
+    List<Usuario> findByRol(Usuario.Rol rol);
 
-
-    List<Usuario> findByRol(String rol); // Nuevo método para encontrar usuarios por rol como String
-
+    // Nuevo método para encontrar usuarios por rol como String
+    List<Usuario> findByRol(String rol);
 
     // Método para encontrar usuarios asociados a un partido específico
     @Query("SELECT u FROM Usuario u JOIN u.partidos p WHERE p.id = :partidoId")
     List<Usuario> findByPartidosId(@Param("partidoId") Long partidoId);
 }
+
 
