@@ -136,8 +136,8 @@
 
 <!-- Cabecera -->
 <div class="header">
+    <h1>Menú Principal Entrenador</h1>
     <div class="left-buttons">
-        <h1>Menú Principal Entrenador</h1>
         <button class="button-3d" th:onclick="|location.href='@{/entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
         <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
         <div class="dropdown">
@@ -159,6 +159,7 @@
     <h2 th:text="'Categoría: ' + ${partido.categoria}">Categoría: </h2>
     <h3 th:text="'Fecha: ' + ${partido.fecha}">Fecha: </h3>
 
+    <!-- Formulario de asistencia -->
     <div class="table-container">
         <form th:action="@{/entrenador/guardarAsistencia}" method="post">
             <input type="hidden" th:value="${partido.id}" name="partidoId" />
@@ -176,8 +177,8 @@
                     <td>
                         <select th:name="'asistencias[' + ${jugador.id} + ']'" class="attendance-select" required>
                             <option value="" disabled selected>Seleccione</option>
-                            <option value="1">Asistió</option>
-                            <option value="2">Faltó</option>
+                            <option value="Asistió">Asistió</option>
+                            <option value="Faltó">Faltó</option>
                         </select>
                     </td>
                 </tr>
@@ -220,6 +221,7 @@
 
 </body>
 </html>
+
 
 
 
