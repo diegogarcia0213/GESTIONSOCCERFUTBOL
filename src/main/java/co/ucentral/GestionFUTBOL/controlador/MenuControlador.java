@@ -38,7 +38,7 @@ public class MenuControlador {
     public String registrarUsuario(@ModelAttribute Usuario usuario, Model modelo) {
         usuarioServicio.registrarUsuario(usuario);
         modelo.addAttribute("mensaje", "Usuario registrado con éxito");
-        return "login"; // Redirige a login.html después de registrar
+        return "registro"; // Redirige a login.html después de registrar
     }
 
     // Procesa el inicio de sesión y redirige según el rol
