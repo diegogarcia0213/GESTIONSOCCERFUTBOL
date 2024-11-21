@@ -49,15 +49,6 @@ public class EntrenamientoServicio {
         }
     }
 
-    // Método para listar todos los entrenamientos
-    public List<Entrenamientos> listarEntrenamientos() {
-        return entrenamientoRepositorio.findAll();
-    }
-
-    // Método para obtener un entrenamiento por su ID
-    public Entrenamientos obtenerEntrenamientoPorId(Long entrenamientoId) {
-        return entrenamientoRepositorio.findById(entrenamientoId).orElse(null);
-    }
 
     // Método para obtener los entrenamientos de una categoría específica
     public List<Entrenamientos> listarEntrenamientosPorCategoria(String categoria) {

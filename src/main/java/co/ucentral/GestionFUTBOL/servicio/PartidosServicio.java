@@ -43,16 +43,6 @@ public class PartidosServicio {
         partidosRepositorio.deleteById(id);
     }
 
-    // Método para listar todos los partidos
-    public List<Partidos> listarPartidos() {
-        return partidosRepositorio.findAll();
-    }
-
-    // Método para obtener un partido por su ID
-    public Partidos obtenerPartidoPorId(Long partidoId) {
-        Optional<Partidos> partido = partidosRepositorio.findById(partidoId);
-        return partido.orElse(null);
-    }
 
     // Método para obtener los partidos de una categoría específica
     public List<Partidos> listarPartidosPorCategoria(String categoria) {
