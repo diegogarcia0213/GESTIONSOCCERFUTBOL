@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 public class MenuControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
-    
     // Página de inicio
     @GetMapping("/")
     public String mostrarInicio() {
@@ -78,22 +77,5 @@ public class MenuControlador {
     @GetMapping("/entrenador/paginaentrenador")
     public String mostrarPaginaEntrenador() {
         return "entrenador/paginaentrenador";  // Redirige a entrenador/paginaentrenador.html
-    }
-
-    @PostMapping("/registro")
-    public String registrarUsuario(@ModelAttribute Usuario usuario, Model modelo) {
-        usuarioServicio.registrarUsuario(usuario);
-        modelo.addAttribute("mensaje", "Usuario registrado con éxito");
-        return "login"; // Redirige a login.html después de registrar
-    }
-
-    @PostMapping("/iniciarSesion")
-    public String iniciarSesion(@RequestParam String email, @RequestParam String password, Model modelo) {
-        return usuarioServicio.validarCredenciales(email, password)
-                .map(usuario -> "redirect:/") // Redirige a la página principal si las credenciales son correctas
-                .orElseGet(() -> {
-                    modelo.addAttribute("error", "Email o contraseña incorrectos");
-                    return "login"; // Vuelve a login.html si hay error
-                });
     }
 }
