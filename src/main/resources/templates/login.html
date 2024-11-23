@@ -5,39 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     <style>
+        /* Estilos globales */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #3d5b72;
+            font-family: 'Arial', sans-serif;
+            background-color: #521325; /* Color vino tinto para la franja */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
+            box-sizing: border-box;
         }
+
+        /* Añadir overlay con imagen de fondo */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 5mm;
+            left: 5mm;
+            right: 5mm;
+            bottom: 5mm;
+            background-image: url("/images/Futbol2.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 1;
+            box-sizing: border-box;
+            border: 5mm solid #521325; /* Borde de 5mm de color vino tinto */
+            z-index: 0;
+
+            /* Mejora de nitidez */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+
         .container {
             width: 400px;
             padding: 20px;
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1; /* Asegura que el contenido esté encima del fondo */
         }
+
         h2 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
+
         input, select {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
             width: 100%;
             padding: 10px;
@@ -47,36 +80,39 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #45a049;
-        }
+
         .link {
             text-align: center;
             margin-top: 10px;
         }
+
         .link a {
             color: #007bff;
             text-decoration: none;
         }
-        .link a:hover {
-            text-decoration: underline;
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Inicio de Sesión</h2>
+    <div th:if="${error}" class="error" th:text="${error}"></div>
     <form th:action="@{/iniciarSesion}" method="POST">
-        <label for="usuario">Nombre de Usuario:</label>
-        <input type="text" id="usuario" name="usuario" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
 
-        <label for="rol">Identificación:</label>
+        <label for="rol">Rol:</label>
         <select id="rol" name="rol" required>
-            <option value="jugador">Jugador</option>
-            <option value="entrenador">Entrenador</option>
+            <option value="JUGADOR">Jugador</option>
+            <option value="ENTRENADOR">Entrenador</option>
         </select>
 
         <button type="submit">Iniciar Sesión</button>
@@ -88,3 +124,4 @@
 </div>
 </body>
 </html>
+

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Pagos</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd; /* Azul claro */
+        }
+
+        /* Estilo de la cabecera */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #182968; /* Azul oscuro */
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .header .left-buttons,
+        .header .right-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .button-3d {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            background-color: #182968; /* Azul predeterminado */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-3d:hover {
+            background-color: #fbc02d; /* Amarillo al hacer hover */
+        }
+
+        .button-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-exit {
+            background-color: #d32f2f;
+        }
+
+        .button-exit:hover {
+            background-color: #ff5252; /* Rojo claro */
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #0d47a1;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .content {
+            padding: 30px;
+            background-color: #521325;
+            min-height: calc(100vh - 70px);
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Cabecera -->
+<div class="header">
+    <div class="left-buttons">
+        <h1>Menú Principal Entrenador</h1>
+
+
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
+
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
+
+        <div class="dropdown">
+            <button class="button-3d">Jugadores</button>
+            <div class="dropdown-content">
+                <a th:href="@{/entrenador/lista}">Lista Jugadores</a>
+                <a th:href="@{/entrenador/pago}">Registrar Pago</a>
+            </div>
+        </div>
+
+
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
+    </div>
+
+    <div class="right-buttons">
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
+    </div>
+</div>
+</div>
+
+<!-- Contenido principal -->
+<div class="content">
+    <p>Bienvenido al sistema de gestión de jugadores y entrenamientos. Selecciona una opción en el menú para comenzar.</p>
+</div>
+
+</body>
+</html>

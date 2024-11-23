@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencia de Partidos</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+        }
+
+        /* Estilo de la cabecera */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #182968;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .header .left-buttons,
+        .header .right-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .button-3d, .button-exit, .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .button-3d {
+            background-color: #182968;
+            color: white;
+        }
+
+        .button-3d:hover {
+            background-color: #fbc02d;
+        }
+
+        .button-exit {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .button-exit:hover {
+            background-color: #ff5252;
+        }
+
+        .search-button {
+            background-color: #fbc02d;
+            color: black;
+        }
+
+        .search-button:hover {
+            background-color: #c49000;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #0d47a1;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Contenido */
+        .content {
+            padding: 30px;
+            text-align: center;
+            color: #1a237e;
+            background-color: #521325;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Contenedor de la tabla */
+        .table-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .training-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: #fff8e1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cabecera -->
+<div class="header">
+    <div class="left-buttons">
+        <h1>Menú Principal Entrenador</h1>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
+        <div class="dropdown">
+            <button class="button-3d">Jugadores</button>
+            <div class="dropdown-content">
+                <a th:href="@{/entrenador/lista}">Lista Jugadores</a>
+                <a th:href="@{/entrenador/pago}">Registrar Pago</a>
+            </div>
+        </div>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
+    </div>
+    <div class="right-buttons">
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
+    </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="content">
+    <h2>Asistencia Partidos</h2>
+    <div class="table-container">
+        <form id="buscar-form" th:action="@{/entrenador/fechaasistencia}" method="get">
+            <div class="training-item" th:each="partido : ${partidos}">
+                <input type="radio" name="selectedPartido" th:value="${partido.id}" required />
+                <span>Fecha: <span th:text="${partido.fecha}">Fecha aquí</span></span> |
+                <span>Categoría: <span th:text="${partido.categoria}">Categoría aquí</span></span>
+            </div>
+            <button type="submit" class="search-button">Buscar</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+
+

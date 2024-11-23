@@ -9,14 +9,40 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: #e0f7fa;
         font-family: 'Arial', sans-serif;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
         height: 100vh;
+        background-color: #521325; /* Color vino tinto para la franja */
+        box-sizing: border-box;
+        overflow: hidden;
     }
 
+    /* Añadir overlay con transparencia y nitidez */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 60px; /* Espacio debajo de la cabecera para la franja vino tinto */
+        left: 4mm;
+        right: 4mm;
+        bottom: 4mm;
+        background-image: url("/images/Futbol2.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 1; /* Transparencia del 70% */
+        box-sizing: border-box;
+        border: 4mm solid #521325; /* Borde de 4mm de color vino tinto */
+        z-index: 0;
+
+        /* Propiedades para mejorar la nitidez */
+        image-rendering: -webkit-optimize-contrast; /* Mejora en WebKit */
+        image-rendering: crisp-edges; /* Mejora para bordes */
+        image-rendering: pixelated; /* Hace la imagen más nítida */
+    }
+
+    /* Ajuste del contenedor principal */
     .container {
         background-color: white;
         padding: 50px;
@@ -24,55 +50,64 @@
         box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
         border-radius: 15px;
         text-align: center;
+        margin-top: 50px;
+        position: relative;
+        z-index: 1; /* Asegura que el contenido esté encima del fondo */
+    }
+
+    /* Estilo para la cabecera con franja azul oscuro */
+    .header {
+        width: 100%;
+        background-color: #133E87; /* Azul oscuro */
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+        box-sizing: border-box;
+        color: white;
+        position: relative;
+        z-index: 1;
+    }
+
+    .btn-header {
+        background-color: #003366; /* Azul oscuro */
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: 2px solid white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-header:hover {
+        background-color: #002244; /* Un tono más oscuro para el hover */
+        transform: scale(1.05);
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-header:active {
+        transform: scale(0.95);
     }
 
     h1 {
         color: #01579b;
         font-size: 28px;
-        margin-bottom: 40px;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-    .btn {
-        background-color: white;
-        color: #01579b;
-        font-size: 20px;
-        font-weight: bold;
-        padding: 15px 30px;
-        border: none;
-        border-radius: 10px;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-        width: 45%;
-    }
-
-    .btn:hover {
-        transform: scale(1.05);
-        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn:active {
-        transform: scale(0.95);
+        margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>BIENVENIDOS AL PROGRAMA DE FÚTBOL <br> PARA GESTIONAR ASISTENCIAS Y PAGOS</h1>
+<div class="header">
+  <button class="btn-header" th:onclick="|location.href='@{/login}'|">Iniciar Sesión</button>
+  <button class="btn-header" th:onclick="|location.href='@{/registro}'|">Registrarse</button>
+</div>
 
-  <div class="button-container">
-    <button class="btn" th:onclick="|location.href='@{/login}'|">Iniciar Sesión</button>
-    <button class="btn" th:onclick="|location.href='@{/registro}'|">Registrarse</button>
-  </div>
+<div class="container">
+  <h1>BIENVENIDOS <br> <img src="/images/Logo1.jpeg" alt="Logo" style="width: 40%;"> </h1>
 </div>
 
 </body>
 </html>
-

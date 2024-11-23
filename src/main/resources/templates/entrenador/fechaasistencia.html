@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencia para el Partido</title>
+    <style>
+        <style>
+    /* Estilo global */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #e3f2fd;
+    }
+
+    /* Estilo de la cabecera */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #182968;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .header h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .header .left-buttons,
+    .header .right-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .button-3d, .button-exit, .search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button-3d {
+        background-color: #182968;
+        color: white;
+    }
+
+    .button-3d:hover {
+        background-color: #fbc02d;
+    }
+
+    .button-exit {
+        background-color: #d32f2f;
+        color: white;
+    }
+
+    .button-exit:hover {
+        background-color: #ff5252;
+    }
+
+    .search-button {
+        background-color: #fbc02d;
+        color: black;
+    }
+
+    .search-button:hover {
+        background-color: #c49000;
+    }
+
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: #0d47a1;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Contenido */
+    .content {
+        padding: 30px;
+        text-align: center;
+        color: #1a237e;
+        background-color: #521325;
+        min-height: calc(100vh - 70px);
+    }
+
+    /* Contenedor de la tabla */
+    .table-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff8e1;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .training-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        background-color: #fff8e1;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    /* Estilo global */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #e3f2fd;
+    }
+
+    /* Estilo de la cabecera */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #182968;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .header h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .button-3d, .button-exit, .save-button, .back-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .button-3d {
+        background-color: #182968;
+        color: white;
+    }
+
+    .button-3d:hover {
+        background-color: #fbc02d;
+    }
+
+    .button-exit {
+        background-color: #d32f2f;
+        color: white;
+    }
+
+    .button-exit:hover {
+        background-color: #ff5252;
+    }
+
+    .save-button {
+        background-color: #2e7d32;
+        color: white;
+    }
+
+    .save-button:hover {
+        background-color: #1b5e20;
+    }
+
+    .back-button {
+        background-color: #d32f2f;
+        color: white;
+    }
+
+    .back-button:hover {
+        background-color: #ff5252;
+    }
+
+    .content {
+        padding: 30px;
+        text-align: center;
+        color: #1a237e;
+        background-color: #521325;
+        min-height: calc(100vh - 70px);
+    }
+
+    .table-container {
+        margin-top: 20px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #182968;
+        color: white;
+    }
+
+    .attendance-select {
+        width: 100%;
+        padding: 5px;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .asistencia-verde {
+        background-color: green;
+        color: white;
+        padding: 5px;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .asistencia-roja {
+        background-color: red;
+        color: white;
+        padding: 5px;
+        text-align: center;
+        border-radius: 4px;
+    }
+    </style>
+</head>
+<body>
+
+<!-- Cabecera -->
+<div class="header">
+    <h1>Menú Principal Entrenador</h1>
+    <div class="left-buttons">
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/entrenamientos/ver/adultos}'|">Ver Entrenamientos</button>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/partidos/ver/adultos}'|">Ver Partidos</button>
+        <div class="dropdown">
+            <button class="button-3d">Jugadores</button>
+            <div class="dropdown-content">
+                <a th:href="@{/entrenador/lista}">Lista Jugadores</a>
+                <a th:href="@{/entrenador/pago}">Registrar Pago</a>
+            </div>
+        </div>
+        <button class="button-3d" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Asistencia Partidos</button>
+    </div>
+    <div class="right-buttons">
+        <button class="button-3d button-exit" th:onclick="|location.href='@{/}'|">Salir</button>
+    </div>
+</div>
+
+<!-- Contenido principal -->
+<div class="content">
+    <h2 th:text="'Categoría: ' + ${partido.categoria}">Categoría: </h2>
+    <h3 th:text="'Fecha: ' + ${partido.fecha}">Fecha: </h3>
+
+    <!-- Formulario de asistencia -->
+    <div class="table-container">
+        <form th:action="@{/entrenador/guardarAsistencia}" method="post">
+            <input type="hidden" th:value="${partido.id}" name="partidoId" />
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Nombre del Jugador</th>
+                    <th>Asistencia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="jugador : ${jugadores}">
+                    <td th:text="${jugador.nombre}">Nombre</td>
+                    <td>
+                        <select th:name="'asistencias[' + ${jugador.id} + ']'" class="attendance-select" required>
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="Asistió">Asistió</option>
+                            <option value="Faltó">Faltó</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="submit" class="save-button">Guardar</button>
+                <button type="button" class="back-button" th:onclick="|location.href='@{/entrenador/asistenciapartidos}'|">Volver</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Resumen de asistencias -->
+    <div class="table-container" style="margin-top: 30px;">
+        <h3>Resumen de Asistencias</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Jugador</th>
+                <th>Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="asistencia : ${listaAsistencias}">
+                <td th:text="${asistencia.jugador.nombre}">Nombre</td>
+                <td>
+                    <div th:if="${asistencia.asistencia == 'Asistió'}" class="asistencia-verde">
+                        Asistió
+                    </div>
+                    <div th:if="${asistencia.asistencia == 'Faltó'}" class="asistencia-roja">
+                        Faltó
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
